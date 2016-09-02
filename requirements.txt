@@ -5,6 +5,3 @@ requests
 simplejson
 RPi.GPIO
 adafruit-io
-socket
-logging
-urllib
