@@ -2,7 +2,7 @@ blinkt
 pillow
 unicornhat
 requests
-json
+simplejson
 time
 threading
 os
