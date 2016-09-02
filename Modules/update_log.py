@@ -3,10 +3,10 @@
 # import threading
 from datetime import datetime
 # from init_logging import *
-from get_latest_json import *
-from get_location import *
-from init_blinkt import green_led
-from get_config import get_config
+from Modules.get_latest_json import *
+from Modules.get_location import *
+from Modules.init_blinkt import green_led
+from Modules.get_config import get_config
 
 # read the config file
 config = get_config()

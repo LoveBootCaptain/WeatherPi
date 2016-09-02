@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from init_blinkt import *
+from Modules.init_blinkt import *
 # import threading
 
 

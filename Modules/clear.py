@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from init_matrix import *
-from init_unicorn import *
-from init_blinkt import *
+from Modules.init_matrix import *
+from Modules.init_unicorn import *
+from Modules.init_blinkt import *
 
 
 def clear_all():

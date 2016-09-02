@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from get_config import get_config
+from Modules.get_config import get_config
 from Adafruit_IO import Client
 
 # read the config file

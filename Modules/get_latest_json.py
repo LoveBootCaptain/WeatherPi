@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import json
-from init_logging import *
+from Modules.init_logging import *
 
 
 def get_latest_json():

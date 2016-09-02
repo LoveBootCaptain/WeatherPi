@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from Fonts.custom_font import *
-from get_latest_json import *
-from init_logging import *
+from Modules.Fonts.custom_font import *
+from Modules.get_latest_json import *
+from Modules.init_logging import *
 
 celsius = "*"  # °c
 Celsius = "C"  # C

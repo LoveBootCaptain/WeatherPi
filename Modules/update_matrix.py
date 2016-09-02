@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 import threading
 # import time
-from init_matrix import *
-from get_sensor_data import *
+from Modules.init_matrix import *
+from Modules.get_sensor_data import *
 # from get_api_data import *
 # from init_blinkt import red_led
-from get_rain_forecast import *
+from Modules.get_rain_forecast import *
 # from init_logging import *
-from get_config import get_config
+from Modules.get_config import get_config
 
 # read the config file
 config = get_config()

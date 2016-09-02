@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import requests
-from init_logging import *
+from Modules.init_logging import *
 
 
 # get location for weather requests
