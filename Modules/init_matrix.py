@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from Driver.Matrix16x8 import Matrix16x8
-from Driver.BicolorBargraph24 import BicolorBargraph24
-from get_config import get_config
+from Modules.Driver.Matrix16x8 import Matrix16x8
+from Modules.Driver.BicolorBargraph24 import BicolorBargraph24
+from Modules.get_config import get_config
 
 # read the config file
 config = get_config()

@@ -8,7 +8,6 @@ from Modules.update_log import *
 from Modules.clear import *
 
 
-
 def main():
 
     threading.Timer(THREADING_TIMER, main).start()
