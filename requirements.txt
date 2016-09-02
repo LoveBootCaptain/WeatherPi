@@ -3,7 +3,6 @@ pillow
 unicornhat
 requests
 simplejson
-threading
 RPi.GPIO
 adafruit-io
 socket
