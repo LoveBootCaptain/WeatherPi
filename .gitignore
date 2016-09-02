@@ -87,3 +87,8 @@ ENV/
 
 # Rope project settings
 .ropeproject
+/logs/latest_weather.json
+/config.json
+.idea/*
+.idea
+
