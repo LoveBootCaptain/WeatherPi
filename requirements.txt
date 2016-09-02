@@ -1,7 +1,4 @@
 blinkt
 pillow
 unicornhat
-requests
-simplejson
-RPi.GPIO
 adafruit-io
