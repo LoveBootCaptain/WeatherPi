@@ -4,10 +4,10 @@
 import json
 # from get_config import get_config
 # from init_sensor import *
-from Modules.get_location import *
-from Modules.init_logging import *
-from Modules.init_blinkt import white_led, blue_led
-from Modules.init_io import *
+from get_location import *
+from init_logging import *
+from init_blinkt import white_led, blue_led
+from init_io import *
 
 # read the config file
 config = get_config()

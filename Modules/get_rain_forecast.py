@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from Modules.Fonts.custom_font import *
+from Fonts.custom_font import *
 # from init_logging import *
-from Modules.get_latest_json import *
+from get_latest_json import *
 
 OFF = 0
 GREEN = 1

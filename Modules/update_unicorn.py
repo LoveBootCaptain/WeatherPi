@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 import time
 # import threading
-from Modules.get_latest_json import *
+from get_latest_json import *
 from PIL import Image
-from Modules.init_unicorn import *
-from Modules.init_blinkt import red_led
-from Modules.init_logging import *
-from Modules.get_config import get_config
+from init_unicorn import *
+from init_blinkt import red_led
+from init_logging import *
+from get_config import get_config
 
 # read the config file
 config = get_config()

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import time
 import threading
-from Modules.Fonts import custom_font
+from Fonts import custom_font
 # from init_logging import *
 
 hours_colon = custom_font.hours

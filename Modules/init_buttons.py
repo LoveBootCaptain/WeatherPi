@@ -3,7 +3,7 @@
 import os
 import RPi.GPIO as GPIO
 import time
-from Modules.init_logging import *
+from init_logging import *
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)

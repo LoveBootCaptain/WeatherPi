@@ -1,14 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import threading
-# import time
-from Modules.init_matrix import *
-from Modules.get_sensor_data import *
+import time
+from init_matrix import *
+from get_sensor_data import *
 # from get_api_data import *
-# from init_blinkt import red_led
-from Modules.get_rain_forecast import *
+from init_blinkt import red_led
+from get_rain_forecast import *
 # from init_logging import *
-from Modules.get_config import get_config
+from get_config import get_config
 
 # read the config file
 config = get_config()
@@ -155,6 +155,6 @@ if __name__ == '__main__':
         update_clock_matrix()
         update_matrix()
     except (KeyboardInterrupt, IOError):
-        from clear import *
+        from Modules.clear import *
         clear_all()
 

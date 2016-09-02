@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 import urllib
 # import threading
-from Modules.get_latest_json import *
-from Modules.init_blinkt import blue_led
-from Modules.init_io import *
+from get_latest_json import *
+from init_blinkt import blue_led
+from init_io import *
 
 THREADING_TIMER = config['THREADING_TIMER']
 

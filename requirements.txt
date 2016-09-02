@@ -1,2 +1,4 @@
+unicornhat
+requests
 blinkt
 pillow

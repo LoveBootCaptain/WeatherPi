@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import unicornhat as unicorn
-from Modules.get_config import get_config
+from get_config import get_config
 
 # read the config file
 config = get_config()

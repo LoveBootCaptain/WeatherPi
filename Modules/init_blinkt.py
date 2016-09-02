@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 import blinkt
 import time
-from Modules.get_config import get_config
-from Modules.init_logging import *
+from get_config import get_config
+from init_logging import *
 
 # read the config file
 config = get_config()
