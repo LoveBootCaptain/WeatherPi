@@ -1,4 +1,3 @@
 blinkt
 pillow
 unicornhat
-adafruit-io
