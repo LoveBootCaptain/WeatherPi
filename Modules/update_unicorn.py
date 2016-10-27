@@ -67,7 +67,7 @@ def get_icon_path():
 
         red_led()
 
-        log_string('Updating Unicorn Icon')
+        log_string('Updating Unicorn Icon to Error Screen')
 
         # set new icon_path
 
