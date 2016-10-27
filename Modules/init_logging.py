@@ -33,3 +33,9 @@ debug_logger.setLevel(logging.DEBUG)
 # Add the log message handler to the logger and make a log-rotation of 100 files with max. 10MB per file
 debug_handler = logging.handlers.RotatingFileHandler(DEBUG_LOG_FILENAME, maxBytes=100000, backupCount=1)
 debug_logger.addHandler(debug_handler)
+
+
+def log_string(string):
+
+    print(string)
+    debug_logger.debug(string)

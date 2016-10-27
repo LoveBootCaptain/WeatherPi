@@ -1,94 +1,101 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import time
-# import threading
+import threading
 from get_latest_json import *
 from PIL import Image
 from init_unicorn import *
 from init_blinkt import red_led
 from init_logging import *
 from get_config import get_config
+import os.path
 
 # read the config file
 config = get_config()
 
 THREADING_TIMER = config['THREADING_TIMER']
 
+img = '/home/pi/WeatherPi/Modules/Animations/error.png'
+
 
 def get_icon():
+
+    # known conditions: clear-day, clear-night, partly-cloudy-day, partly-cloudy-night, windy, cloudy, rain, snow, fog
 
     json_data = get_latest_json()
 
     icon = json_data['currently']['icon']
 
-    log_string = 'Icon to show on Unicorn_HAT: {}'.format(icon)
+    log_string('Icon to show on Unicorn_HAT: {}'.format(icon))
 
-    print(log_string)
-    debug_logger.debug(log_string)
+    return icon
 
-    if icon == 'clear-day':
 
-        img = Image.open('/home/pi/WeatherPi/Modules/Animations/sunny.png')
+def get_icon_path():
 
-    elif icon == 'clear-night':
+    threading.Timer(10, get_icon_path).start()
 
-        img = Image.open('/home/pi/WeatherPi/Modules/Animations/moon.png')
+    global img
 
-    elif icon == 'partly-cloudy-day':
+    icon = get_icon()
 
-        img = Image.open('/home/pi/WeatherPi/Modules/Animations/cloudy_day.png')
+    base_path = '/home/pi/WeatherPi/Modules/Animations/'
 
-    elif icon == 'partly-cloudy-night':
+    icon_extension = 'png'
 
-        img = Image.open('/home/pi/WeatherPi/Modules/Animations/cloudy_night.png')
+    icon_path = base_path + icon + '.' + icon_extension
 
-    elif icon == 'windy':
+    log_string('The Icon Path should be: {}. Checking it...'.format(icon_path))
 
-        img = Image.open('/home/pi/WeatherPi/Modules/Animations/windy.png')
+    # check if file and path are valid
 
-    elif icon == 'cloudy':
+    if os.path.isfile(icon_path):
 
-        img = Image.open('/home/pi/WeatherPi/Modules/Animations/cloudy.png')
+        log_string('The File: {} is valid and present'.format(icon_path))
 
-    elif icon == 'rain':
+        red_led()
 
-        img = Image.open('/home/pi/WeatherPi/Modules/Animations/rain.png')
+        log_string('Updating Unicorn Icon')
 
-    elif icon == 'snow':
+        # set new icon_path
 
-        img = Image.open('/home/pi/WeatherPi/Modules/Animations/snow.png')
+        img = icon_path
 
     else:
 
-        img = Image.open('/home/pi/WeatherPi/Modules/Animations/error.png')
+        log_string('Error - there is no icon for this weather condition. Please check.')
 
-    return img
+        red_led()
+
+        log_string('Updating Unicorn Icon')
+
+        # set new icon_path
+
+        icon_path = '/home/pi/WeatherPi/Modules/Animations/error.png'
+
+        img = icon_path
 
 
 def update_unicorn():
 
-    # threading.Timer(THREADING_TIMER, update_unicorn).start()
-
-    # my_current_img = current_img
-
-    img = get_icon()
-
-    red_led()
+    global img
 
     unicorn.clear()
 
-    # while True:
+    log_string('Start Unicorn Image Loop')
 
-    for i in range(23):
+    while img:
 
-        for o_x in range(int(img.size[0] / 8)):
+        my_img = Image.open(img)
 
-            for o_y in range(int(img.size[1] / 8)):
+        for o_x in range(int(my_img.size[0] / 8)):
+
+            for o_y in range(int(my_img.size[1] / 8)):
 
                 for x in range(8):
 
                     for y in range(8):
-                        pixel = img.getpixel(((o_x * 8) + y, (o_y * 8) + x))
+                        pixel = my_img.getpixel(((o_x * 8) + y, (o_y * 8) + x))
                         # print(pixel)
                         r, g, b = int(pixel[0]), int(pixel[1]), int(pixel[2])
                         unicorn.set_pixel(x, y, r, g, b)
@@ -101,7 +108,9 @@ if __name__ == '__main__':
 
     try:
         unicorn_init()
+        get_icon_path()
         update_unicorn()
+
     except KeyboardInterrupt:
         unicorn.clear()
         unicorn.show()

@@ -30,7 +30,8 @@ def main():
         update_io_adafruit()
         time.sleep(0.5)
 
-        update_unicorn()
+        get_icon_path()
+        time.sleep(0.5)
 
     except (KeyboardInterrupt, AttributeError, Exception, StandardError):
 
@@ -39,10 +40,18 @@ def main():
 
 if __name__ == '__main__':
 
-    matrix_init()
-    unicorn_init()
-    blinkt_init()
+    try:
 
-    update_clock_matrix()
+        matrix_init()
+        unicorn_init()
+        blinkt_init()
 
-    main()
+        update_clock_matrix()
+
+        main()
+
+        update_unicorn()
+
+    except (KeyboardInterrupt, AttributeError, Exception, StandardError):
+
+        clear_all()
