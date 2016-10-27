@@ -18,10 +18,7 @@ def get_sensor_temp_inside():
     the_output_data = digits[output_temp[0]] + digits[output_temp[1]] + \
                       temp_digits[unit[0]] + temp_digits[Celsius[0]]
 
-    log_string = 'Temperature Inside: {}°C'.format(output_temp)
-
-    print(log_string)
-    debug_logger.debug(log_string)
+    log_string('Temperature Inside: {}°C'.format(output_temp))
 
     return the_output_data
 
@@ -41,10 +38,7 @@ def get_sensor_temp_outside():
                       temp_digits[sensor_outside_data[0]] + temp_digits[sensor_outside_data[1]] + \
                       temp_digits[celsius[0]]
 
-    log_string = 'Temperature Outside: {} {}°C'.format(plus_minus, sensor_outside_data)
-
-    print(log_string)
-    debug_logger.debug(log_string)
+    log_string('Temperature Outside: {} {}°C'.format(plus_minus, sensor_outside_data))
 
     return the_output_data
 

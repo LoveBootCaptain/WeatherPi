@@ -41,10 +41,7 @@ def red_led():
     blinkt.clear()
     blinkt.show()
 
-    log_string = 'Blinkt: Red'
-
-    print(log_string)
-    debug_logger.debug(log_string)
+    log_string('Blinkt: Red')
 
 
 def green_led():
@@ -66,10 +63,7 @@ def green_led():
     blinkt.clear()
     blinkt.show()
 
-    log_string = 'Blinkt: Green'
-
-    print(log_string)
-    debug_logger.debug(log_string)
+    log_string('Blinkt: Green')
 
 
 def blue_led():
@@ -91,10 +85,7 @@ def blue_led():
     blinkt.clear()
     blinkt.show()
 
-    log_string = 'Blinkt: Blue'
-
-    print(log_string)
-    debug_logger.debug(log_string)
+    log_string('Blinkt: Blue')
 
 
 def yellow_led():
@@ -116,10 +107,7 @@ def yellow_led():
     blinkt.clear()
     blinkt.show()
 
-    log_string = 'Blinkt: Yellow'
-
-    print(log_string)
-    debug_logger.debug(log_string)
+    log_string('Blinkt: Yellow')
 
 
 def white_led():
@@ -141,10 +129,7 @@ def white_led():
     blinkt.clear()
     blinkt.show()
 
-    log_string = 'Blinkt: White'
-
-    print(log_string)
-    debug_logger.debug(log_string)
+    log_string('Blinkt: White')
 
 
 if __name__ == '__main__':

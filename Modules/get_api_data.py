@@ -25,9 +25,6 @@ def get_temp_api():
                       temp_digits[temp_api[0]] + temp_digits[temp_api[1]] + \
                       temp_digits[celsius[0]]
 
-    log_string = 'Temperature API: {} {}°C'.format(plus_minus, temp_api)
-
-    print(log_string)
-    debug_logger.debug(log_string)
+    log_string('Temperature API: {} {}°C'.format(plus_minus, temp_api))
 
     return the_output_data

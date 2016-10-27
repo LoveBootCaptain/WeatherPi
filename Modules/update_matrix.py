@@ -39,18 +39,15 @@ def update_matrix():
             value[1].clear()
             value[1].display_16x8_buffer(value[3])
             value[1].write_display()
-            log_string = '{} updated mit {} - {}'.format(value[0], value[2], value[3])
-            print(log_string)
-            debug_logger.debug(log_string)
+
+            log_string('{} updated mit {} - {}'.format(value[0], value[2], value[3]))
+
             red_led()
             time.sleep(0.25)
 
     except IOError:
 
-        log_string = 'Matrix Error'
-
-        print(log_string)
-        debug_logger.debug(log_string)
+        log_string('Matrix Error')
 
         return
 
@@ -74,16 +71,13 @@ def update_bargraph():
         for i in rain_forecast["RED"]:
             bargraph.set_bar(i, RED)
 
-        log_string = 'Bargraph Updated GREEN: {},\n' \
-                     'Bargraph Updated YELLOW: {},\n' \
-                     'Bargraph Updated RED: {}'.format(
-            rain_forecast["GREEN"],
-            rain_forecast["YELLOW"],
-            rain_forecast["RED"]
-        )
-
-        print(log_string)
-        debug_logger.debug(log_string)
+        log_string('Bargraph Updated GREEN: {},\n'
+                   'Bargraph Updated YELLOW: {},\n'
+                   'Bargraph Updated RED: {}'.format(
+                    rain_forecast["GREEN"],
+                    rain_forecast["YELLOW"],
+                    rain_forecast["RED"]
+                    ))
 
         bargraph.write_display()
 
@@ -91,10 +85,7 @@ def update_bargraph():
 
     except IOError:
 
-        log_string = 'Bargraph Error'
-
-        print(log_string)
-        debug_logger.debug(log_string)
+        log_string('Bargraph Error')
 
         return
 
@@ -141,10 +132,7 @@ def update_clock_matrix():
 
     except IOError:
 
-        log_string = 'Clock Matrix Error'
-
-        print(log_string)
-        debug_logger.debug(log_string)
+        log_string('Clock Matrix Error')
 
         return
 

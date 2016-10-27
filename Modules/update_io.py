@@ -39,10 +39,7 @@ def update_io_thing_speak():
 
         connection.read()
 
-        log_string = 'Send data to ThingSpeak IO: {}'.format(io_url)
-
-        print(log_string)
-        debug_logger.debug(log_string)
+        log_string('Send data to ThingSpeak IO: {}'.format(io_url))
 
         connection.close()
 
@@ -50,10 +47,7 @@ def update_io_thing_speak():
 
     except IOError:
 
-        log_string = 'ThingSpeak IO - Connection Error'
-
-        print(log_string)
-        debug_logger.debug(log_string)
+        log_string('ThingSpeak IO - Connection Error')
 
 
 def update_io_adafruit():
@@ -107,17 +101,11 @@ def update_io_adafruit():
         try:
             aio_dashboard.send(feed, value)
 
-            log_string = '{}={} send to adafruit.io'.format(feed, value)
-
-            print(log_string)
-            debug_logger.debug(log_string)
+            log_string('{}={} send to adafruit.io'.format(feed, value))
 
         except IOError:
 
-            log_string = 'Adafruit IO - Connection Error - Feed: {} - Value: {}'.format(feed, value)
-
-            print(log_string)
-            debug_logger.debug(log_string)
+            log_string('Adafruit IO - Connection Error - Feed: {} - Value: {}'.format(feed, value))
 
     blue_led()
 

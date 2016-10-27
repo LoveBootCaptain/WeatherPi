@@ -65,35 +65,32 @@ def update_log():
     latitude = location_data['lat']  # geolocation data for the request url
     longitude = location_data['lon']  # geolocation data for the request url
 
-    log_string = '[timestamp={}], [temp_api={}], [sensor_temp_inside={}], [sensor_temp_outside={}],' \
-                 ' [rain_percentage={}], [sensor_pressure_inside={}], [sensor_humidity_inside={}],' \
-                 ' [sensor_pressure_outside={}], [sensor_humidity_outside={}], [summary="{}"],' \
-                 ' [next_weather_today="{}"], [latitude={}], [longitude={}], [location={}]'.format(
-        timestamp,
-        temperature,
-        sensor_temp_inside,
-        sensor_temp_outside,
-        rain_percentage,
-        sensor_pressure_inside,
-        sensor_humidity_inside,
-        sensor_pressure_outside,
-        sensor_humidity_outside,
-        summary,
-        io_str,
-        latitude,
-        longitude,
-        location
-    )
+    log_string_base = '[timestamp={}], [temp_api={}], [sensor_temp_inside={}], [sensor_temp_outside={}], ' \
+                      '[rain_percentage={}], [sensor_pressure_inside={}], [sensor_humidity_inside={}],' \
+                      ' [sensor_pressure_outside={}], [sensor_humidity_outside={}], [summary="{}"],' \
+                      ' [next_weather_today="{}"], [latitude={}], [longitude={}], [location={}]'.format(
+                        timestamp,
+                        temperature,
+                        sensor_temp_inside,
+                        sensor_temp_outside,
+                        rain_percentage,
+                        sensor_pressure_inside,
+                        sensor_humidity_inside,
+                        sensor_pressure_outside,
+                        sensor_humidity_outside,
+                        summary,
+                        io_str,
+                        latitude,
+                        longitude,
+                        location
+                        )
 
     # write log_string to log file
-    weather_logger.info(log_string)
+    weather_logger.info(log_string_base)
 
     green_led()
 
-    log_string = 'created log entry: {}'.format(log_string)
-
-    print(log_string)
-    debug_logger.debug(log_string)
+    log_string('created log entry: {}'.format(log_string_base))
 
 if __name__ == '__main__':
     update_log()

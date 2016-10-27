@@ -12,15 +12,10 @@ def get_latest_json():
 
         json_data = json.loads(data)
 
-        log_string = 'json file read by module'
-
-        print(log_string)
-        debug_logger.debug(log_string)
+        log_string('json file read by module')
 
         return json_data
 
     except IOError:
-        log_string = 'ERROR - json file read by module'
 
-        print(log_string)
-        debug_logger.debug(log_string)
+        log_string('ERROR - json file read by module')
