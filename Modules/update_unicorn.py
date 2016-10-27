@@ -55,7 +55,7 @@ def get_icon_path():
 
         red_led()
 
-        log_string('Updating Unicorn Icon')
+        log_string('Updating Unicorn Icon with ne weather condition')
 
         # set new icon_path
 
