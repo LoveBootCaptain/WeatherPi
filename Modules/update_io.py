@@ -3,7 +3,7 @@
 import urllib
 # import threading
 from get_latest_json import *
-from init_blinkt import blue_led
+from init_blinkt import *
 from init_io import *
 
 THREADING_TIMER = config['THREADING_TIMER']
@@ -43,7 +43,7 @@ def update_io_thing_speak():
 
         connection.close()
 
-        blue_led()
+        blink('blue')
 
     except IOError:
 
@@ -107,7 +107,7 @@ def update_io_adafruit():
 
             log_string('Adafruit IO - Connection Error - Feed: {} - Value: {}'.format(feed, value))
 
-    blue_led()
+    blink('blue')
 
 
 if __name__ == '__main__':

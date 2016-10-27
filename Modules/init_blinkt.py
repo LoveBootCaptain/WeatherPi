@@ -22,7 +22,7 @@ def blinkt_init():
     blinkt.show()
 
 
-def red_led():
+def blink(color):
 
     blinkt_init()
 
@@ -33,114 +33,73 @@ def red_led():
         # Triangle wave, a snappy ping-pong effect
         offset = int(abs((delta % 16) - 8))
 
-        for i in range(8):
-            blinkt.set_pixel(i, leds[offset + i], 0, 0)
-        blinkt.show()
+        if color == 'white':
+
+            for i in range(8):
+
+                blinkt.set_pixel(i, leds[offset + i], leds[offset + i], leds[offset + i])
+
+            blinkt.show()
+
+        elif color == 'red':
+
+            for i in range(8):
+
+                blinkt.set_pixel(i, leds[offset + i], 0, 0)
+
+            blinkt.show()
+
+        elif color == 'yellow':
+
+            for i in range(8):
+
+                blinkt.set_pixel(i, leds[offset + i], leds[offset + i], 0)
+
+            blinkt.show()
+
+        elif color == 'blue':
+
+            for i in range(8):
+
+                blinkt.set_pixel(i, 0, 0, leds[offset + i])
+
+            blinkt.show()
+
+        elif color == 'green':
+
+            for i in range(8):
+
+                blinkt.set_pixel(i, 0, leds[offset + i], 0)
+
+            blinkt.show()
+
+        else:
+
+            log_string('ERROR: Blinkt Color {} not set. Showing white.'.format(color))
+
+            for i in range(8):
+
+                blinkt.set_pixel(i, leds[offset + i], leds[offset + i], leds[offset + i])
+
+            blinkt.show()
 
         time.sleep(0.1)
+
     blinkt.clear()
     blinkt.show()
 
-    log_string('Blinkt: Red')
-
-
-def green_led():
-
-    blinkt_init()
-
-    for i in range(9):
-
-        delta = (time.time() - start_time) * 16
-
-        # Triangle wave, a snappy ping-pong effect
-        offset = int(abs((delta % 16) - 8))
-
-        for i in range(8):
-            blinkt.set_pixel(i, 0, leds[offset + i], 0)
-        blinkt.show()
-
-        time.sleep(0.1)
-    blinkt.clear()
-    blinkt.show()
-
-    log_string('Blinkt: Green')
-
-
-def blue_led():
-
-    blinkt_init()
-
-    for i in range(9):
-
-        delta = (time.time() - start_time) * 16
-
-        # Triangle wave, a snappy ping-pong effect
-        offset = int(abs((delta % 16) - 8))
-
-        for i in range(8):
-            blinkt.set_pixel(i, 0, 0, leds[offset + i])
-        blinkt.show()
-
-        time.sleep(0.1)
-    blinkt.clear()
-    blinkt.show()
-
-    log_string('Blinkt: Blue')
-
-
-def yellow_led():
-
-    blinkt_init()
-
-    for i in range(9):
-
-        delta = (time.time() - start_time) * 16
-
-        # Triangle wave, a snappy ping-pong effect
-        offset = int(abs((delta % 16) - 8))
-
-        for i in range(8):
-            blinkt.set_pixel(i, leds[offset + i], leds[offset + i], 0)
-        blinkt.show()
-
-        time.sleep(0.1)
-    blinkt.clear()
-    blinkt.show()
-
-    log_string('Blinkt: Yellow')
-
-
-def white_led():
-
-    blinkt_init()
-
-    for i in range(9):
-
-        delta = (time.time() - start_time) * 16
-
-        # Triangle wave, a snappy ping-pong effect
-        offset = int(abs((delta % 16) - 8))
-
-        for i in range(8):
-            blinkt.set_pixel(i, leds[offset + i], leds[offset + i], leds[offset + i])
-        blinkt.show()
-
-        time.sleep(0.1)
-    blinkt.clear()
-    blinkt.show()
-
-    log_string('Blinkt: White')
+    log_string('Blinkt: {}'.format(color))
 
 
 if __name__ == '__main__':
 
     blinkt_init()
 
-    red_led()
-    green_led()
-    blue_led()
-    yellow_led()
-    white_led()
+    blink('white')
+    blink('red')
+    blink('blue')
+    blink('yellow')
+    blink('green')
 
     blinkt.clear()
     blinkt.show()

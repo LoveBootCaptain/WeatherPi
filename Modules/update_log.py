@@ -5,7 +5,7 @@ from datetime import datetime
 # from init_logging import *
 from get_latest_json import *
 from get_location import *
-from init_blinkt import green_led
+from init_blinkt import *
 from get_config import get_config
 
 # read the config file
@@ -88,7 +88,7 @@ def update_log():
     # write log_string to log file
     weather_logger.info(log_string_base)
 
-    green_led()
+    blink('green')
 
     log_string('created log entry: {}'.format(log_string_base))
 

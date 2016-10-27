@@ -5,7 +5,7 @@ import time
 from init_matrix import *
 from get_sensor_data import *
 # from get_api_data import *
-from init_blinkt import red_led
+from init_blinkt import *
 from get_rain_forecast import *
 # from init_logging import *
 from get_config import get_config
@@ -42,7 +42,7 @@ def update_matrix():
 
             log_string('{} updated mit {} - {}'.format(value[0], value[2], value[3]))
 
-            red_led()
+            blink('red')
             time.sleep(0.25)
 
     except IOError:
@@ -81,7 +81,7 @@ def update_bargraph():
 
         bargraph.write_display()
 
-        red_led()
+        blink('red')
 
     except IOError:
 

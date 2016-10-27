@@ -8,7 +8,7 @@ def update_blinkt():
 
     # threading.Timer(60, update_blinkt).start()
 
-    yellow_led()
+    blink('yellow')
 
 if __name__ == '__main__':
 

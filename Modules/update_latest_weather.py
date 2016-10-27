@@ -6,7 +6,7 @@ import json
 # from init_sensor import *
 from get_location import *
 from init_logging import *
-from init_blinkt import white_led, blue_led
+from init_blinkt import *
 from init_io import *
 
 # read the config file
@@ -78,7 +78,7 @@ def update_latest_weather():
 
     log_string('fetched sensorhumidityoutside from adafruit.io: {}'.format(sensor_humidity_outside))
 
-    blue_led()
+    blink('blue')
 
     data['currently']['sensor_temp_inside'] = sensor_temp_inside
     data['currently']['sensor_pressure_inside'] = sensor_pressure_inside
@@ -107,7 +107,7 @@ def update_latest_weather():
 
     log_string('json data saved to temporary file')
 
-    white_led()
+    blink('white')
 
 
 if __name__ == '__main__':

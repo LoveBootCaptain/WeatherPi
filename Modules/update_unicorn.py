@@ -5,7 +5,7 @@ import time
 from get_latest_json import *
 from PIL import Image
 from init_unicorn import *
-from init_blinkt import red_led
+from init_blinkt import *
 from init_logging import *
 from get_config import get_config
 import os.path
@@ -59,7 +59,7 @@ def get_icon_path():
 
         img = icon_path
 
-        red_led()
+        blink('red')
 
     else:
 
@@ -73,7 +73,7 @@ def get_icon_path():
 
         img = icon_path
 
-        red_led()
+        blink('red')
 
 
 def update_unicorn():
