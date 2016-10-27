@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import time
-import threading
+# import threading
 from get_latest_json import *
 from PIL import Image
 from init_unicorn import *
@@ -53,19 +53,17 @@ def get_icon_path():
 
         log_string('The File: {} is valid and present'.format(icon_path))
 
-        red_led()
-
-        log_string('Updating Unicorn Icon with ne weather condition')
+        log_string('Updating Unicorn with new weather condition Icon')
 
         # set new icon_path
 
         img = icon_path
 
+        red_led()
+
     else:
 
         log_string('Error - there is no icon for this weather condition. Please check.')
-
-        red_led()
 
         log_string('Updating Unicorn Icon to Error Screen')
 
@@ -74,6 +72,8 @@ def get_icon_path():
         icon_path = '/home/pi/WeatherPi/Modules/Animations/error.png'
 
         img = icon_path
+
+        red_led()
 
 
 def update_unicorn():
