@@ -17,6 +17,8 @@ THREADING_TIMER = config['THREADING_TIMER']
 
 img = '/home/pi/WeatherPi/Modules/Animations/error.png'
 
+base_path = '/home/pi/WeatherPi/Modules/Animations/'
+
 
 def get_icon():
 
@@ -38,8 +40,6 @@ def get_icon_path():
     global img
 
     icon = get_icon()
-
-    base_path = '/home/pi/WeatherPi/Modules/Animations/'
 
     icon_extension = 'png'
 
@@ -104,10 +104,46 @@ def update_unicorn():
                 time.sleep(0.25)
 
 
+def test_unicorn():
+
+    print('Testing all images in folder {}'.format(base_path))
+
+    for file in os.listdir(base_path):
+
+        if file.endswith(".png"):
+
+            print('Testing image: {}'.format(base_path + file))
+
+            file = Image.open(base_path + file)
+
+            for o_x in range(int(file.size[0] / 8)):
+
+                for o_y in range(int(file.size[1] / 8)):
+
+                    for x in range(8):
+
+                        for y in range(8):
+                            pixel = file.getpixel(((o_x * 8) + y, (o_y * 8) + x))
+                            # print(pixel)
+                            r, g, b = int(pixel[0]), int(pixel[1]), int(pixel[2])
+                            unicorn.set_pixel(x, y, r, g, b)
+
+                    unicorn.show()
+                    time.sleep(0.25)
+
+        else:
+
+            print('Not using this file, not an image: {}'.format(file))
+
+
 if __name__ == '__main__':
 
     try:
+
         unicorn_init()
+
+        test_unicorn()
+
         get_icon_path()
         update_unicorn()
 
