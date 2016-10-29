@@ -19,6 +19,8 @@ img = '/home/pi/WeatherPi/Modules/Animations/error.png'
 
 base_path = '/home/pi/WeatherPi/Modules/Animations/'
 
+icon_extension = '.' + 'png'
+
 
 def get_icon():
 
@@ -41,9 +43,7 @@ def get_icon_path():
 
     icon = get_icon()
 
-    icon_extension = 'png'
-
-    icon_path = base_path + icon + '.' + icon_extension
+    icon_path = base_path + icon + icon_extension
 
     log_string('The Icon Path should be: {}. Checking it...'.format(icon_path))
 
@@ -110,7 +110,7 @@ def test_unicorn():
 
     for file in os.listdir(base_path):
 
-        if file.endswith(".png"):
+        if file.endswith(icon_extension):
 
             print('Testing image: {}'.format(base_path + file))
 
