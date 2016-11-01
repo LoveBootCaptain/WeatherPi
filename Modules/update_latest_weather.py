@@ -17,7 +17,7 @@ FORECAST_IO_KEY = config['FORECAST_IO_KEY']
 THREADING_TIMER = config['THREADING_TIMER']
 
 # parameter for the request url
-FORECAST_URL = 'https://api.forecast.io/forecast/'  # endpoint for the API
+FORECAST_URL = 'https://api.forecast.io/forecast/'  # endpoint for the API (v2)
 
 location_data = get_location()
 
