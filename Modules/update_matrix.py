@@ -4,18 +4,17 @@ import threading
 import time
 from init_matrix import *
 from get_sensor_data import *
-# from get_api_data import *
+from get_api_data import *
 from init_blinkt import *
 from get_rain_forecast import *
-# from init_logging import *
+from init_logging import *
 from get_config import get_config
+from clear import clear_all
 
 # read the config file
 config = get_config()
 
 THREADING_TIMER = config['THREADING_TIMER']
-
-matrix_init()
 
 
 def update_matrix():
@@ -98,7 +97,8 @@ colon_on = True
 
 def update_clock_matrix():
 
-    threading.Timer(1, update_clock_matrix).start()
+    t = threading.Timer(1, update_clock_matrix)
+    t.start()
 
     global colon_on
 
@@ -118,31 +118,28 @@ def update_clock_matrix():
     the_min_data = digits[the_min[0]] + digits[the_min[1]]
     time_buffer = the_hour_data + the_min_data
 
-    try:
+    matrix_blue.clear()
 
-        matrix_blue.clear()
+    matrix_blue.display_16x8_buffer(time_buffer)
+    matrix_blue.write_display()
 
-        matrix_blue.display_16x8_buffer(time_buffer)
-        matrix_blue.write_display()
-
-        # log_string = 'Blue Matrix (Time) updated - {}:{} - {}'.format(the_hour, the_min, time_buffer)
-        #
-        # print(log_string)
-        # debug_logger.debug(log_string)
-
-    except IOError:
-
-        log_string('Clock Matrix Error')
-
-        return
+    # log_string = 'Blue Matrix (Time) updated - {}:{} - {}'.format(the_hour, the_min, time_buffer)
+    #
+    # print(log_string)
+    # debug_logger.debug(log_string)
 
 if __name__ == '__main__':
 
     try:
+
+        matrix_init()
+
+        update_matrix()
         update_bargraph()
         update_clock_matrix()
-        update_matrix()
-    except (KeyboardInterrupt, IOError):
-        from Modules.clear import *
+
+    except KeyboardInterrupt:
+
         clear_all()
+
 
