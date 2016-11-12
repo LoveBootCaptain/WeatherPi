@@ -97,36 +97,42 @@ colon_on = True
 
 def update_clock_matrix():
 
-    t = threading.Timer(1, update_clock_matrix)
-    t.start()
+    try:
 
-    global colon_on
+        t = threading.Timer(1, update_clock_matrix)
+        t.start()
 
-    the_hour = time.strftime("%I")
-    the_min = time.strftime("%M")
+        global colon_on
 
-    if the_hour.startswith("0"):
-        the_hour = the_hour[1:]
+        the_hour = time.strftime("%I")
+        the_min = time.strftime("%M")
 
-    if colon_on:
-        colon_on = False
-        the_hour_data = hours_colon[the_hour]
-    else:
-        colon_on = True
-        the_hour_data = hours_no_colon[the_hour]
+        if the_hour.startswith("0"):
+            the_hour = the_hour[1:]
 
-    the_min_data = digits[the_min[0]] + digits[the_min[1]]
-    time_buffer = the_hour_data + the_min_data
+        if colon_on:
+            colon_on = False
+            the_hour_data = hours_colon[the_hour]
+        else:
+            colon_on = True
+            the_hour_data = hours_no_colon[the_hour]
 
-    matrix_blue.clear()
+        the_min_data = digits[the_min[0]] + digits[the_min[1]]
+        time_buffer = the_hour_data + the_min_data
 
-    matrix_blue.display_16x8_buffer(time_buffer)
-    matrix_blue.write_display()
+        matrix_blue.clear()
 
-    # log_string = 'Blue Matrix (Time) updated - {}:{} - {}'.format(the_hour, the_min, time_buffer)
-    #
-    # print(log_string)
-    # debug_logger.debug(log_string)
+        matrix_blue.display_16x8_buffer(time_buffer)
+        matrix_blue.write_display()
+
+        # log_string = 'Blue Matrix (Time) updated - {}:{} - {}'.format(the_hour, the_min, time_buffer)
+        #
+        # print(log_string)
+        # debug_logger.debug(log_string)
+
+    except KeyboardInterrupt:
+
+        clear_all()
 
 if __name__ == '__main__':
 
@@ -134,9 +140,9 @@ if __name__ == '__main__':
 
         matrix_init()
 
+        update_clock_matrix()
         update_matrix()
         update_bargraph()
-        update_clock_matrix()
 
     except KeyboardInterrupt:
 

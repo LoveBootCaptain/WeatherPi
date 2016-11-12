@@ -54,12 +54,12 @@ def update_latest_weather():
     sensor_pressure_inside = aio_sensors.receive('sensorpressureinside')
     sensor_pressure_inside = float(sensor_pressure_inside.value)
 
-    log_string('fetched sensorpressureoutside from adafruit.io: {}'.format(sensor_pressure_inside))
+    log_string('fetched sensorpressureinside from adafruit.io: {}'.format(sensor_pressure_inside))
 
     sensor_humidity_inside = aio_sensors.receive('sensorhumidityinside')
     sensor_humidity_inside = float(sensor_humidity_inside.value)
 
-    log_string('fetched sensorhumidityoutside from adafruit.io: {}'.format(sensor_humidity_inside))
+    log_string('fetched sensorhumidityinside from adafruit.io: {}'.format(sensor_humidity_inside))
 
     #  get sensor data outside
 

@@ -33,7 +33,7 @@ def main():
         get_icon_path()
         time.sleep(0.5)
 
-    except (KeyboardInterrupt, AttributeError, Exception, StandardError):
+    except KeyboardInterrupt:
 
         clear_all()
 
@@ -52,6 +52,6 @@ if __name__ == '__main__':
 
         update_unicorn()
 
-    except (KeyboardInterrupt, AttributeError, Exception, StandardError):
+    except KeyboardInterrupt:
 
         clear_all()
