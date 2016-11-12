@@ -3,6 +3,7 @@
 from init_matrix import *
 from init_unicorn import *
 from init_blinkt import *
+from init_logging import *
 
 
 def clear_all():
@@ -20,6 +21,8 @@ def clear_all():
 
     blinkt.clear()
     blinkt.show()
+
+    log_string('Clear Display')
 
 
 if __name__ == '__main__':
