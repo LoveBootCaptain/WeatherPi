@@ -26,7 +26,7 @@ def blink(color):
 
     blinkt_init()
 
-    for i in range(9):
+    for y in range(9):
 
         delta = (time.time() - start_time) * 16
 
