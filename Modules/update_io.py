@@ -96,12 +96,14 @@ def update_io_adafruit():
         'weather_icon': weather_icon
     }
 
+    log_string('package for adafruit io: {}'.format(feed_list))
+
     for feed, value in feed_list.items():
 
         try:
             aio_dashboard.send(feed, value)
 
-            log_string('{}={} send to adafruit.io'.format(feed, value))
+            log_string('{}={} successfully send to adafruit.io'.format(feed, value))
 
         except IOError:
 
