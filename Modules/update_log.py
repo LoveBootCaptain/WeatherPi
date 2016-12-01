@@ -88,9 +88,9 @@ def update_log():
     # write log_string to log file
     weather_logger.info(log_string_base)
 
-    blink('green')
-
     log_string('created log entry: {}'.format(log_string_base))
+
+    blink('green')
 
 if __name__ == '__main__':
     update_log()
