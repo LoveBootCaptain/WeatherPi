@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 # import threading
 import json
+import os
 # from get_config import get_config
 # from init_sensor import *
 from get_location import *
 from init_logging import *
 from init_blinkt import *
 from init_io import *
+
 
 # read the config file
 config = get_config()
@@ -105,7 +107,15 @@ def update_latest_weather():
     with open('/home/pi/WeatherPi/logs/latest_weather.json', 'w') as outputfile:
         json.dump(data, outputfile, indent=2, sort_keys=True)
 
+    with open('/home/pi/WeatherPi/logs/current_weather.json', 'w') as outputfile:
+        json.dump(data['currently'], outputfile, indent=2, sort_keys=True)
+
     log_string('json data saved to temporary file')
+
+    os.system('cp /home/pi/WeatherPi/logs/latest_weather.json /var/www/html')
+    os.system('cp /home/pi/WeatherPi/logs/current_weather.json /var/www/html')
+
+    log_string('json data copied to /var/www/html')
 
     blink('white')
 
