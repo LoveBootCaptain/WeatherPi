@@ -24,7 +24,7 @@ icon_extension = '.' + 'png'
 
 def get_icon():
 
-    # known conditions: clear-day, clear-night, partly-cloudy-day, partly-cloudy-night, windy, cloudy, rain, snow, fog
+    # known conditions: clear-day, clear-night, partly-cloudy-day, partly-cloudy-night, wind, cloudy, rain, snow, fog
 
     json_data = get_latest_json()
 
