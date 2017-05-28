@@ -37,8 +37,6 @@ def get_icon():
 
 def get_icon_path():
 
-    # threading.Timer(10, get_icon_path).start()
-
     global img_file
 
     icon = get_icon()

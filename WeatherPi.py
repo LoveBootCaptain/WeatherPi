@@ -7,10 +7,26 @@ from Modules.update_io import *
 from Modules.update_log import *
 from Modules.clear import *
 
+threads = []
+
+
+def quit_all():
+
+    global threads
+
+    for thread in threads:
+        thread.cancel()
+        thread.join()
+
 
 def main():
+    global threads
 
-    threading.Timer(THREADING_TIMER, main).start()
+    thread = threading.Timer(THREADING_TIMER, main)
+
+    thread.start()
+
+    threads.append(thread)
 
     try:
 
@@ -34,7 +50,8 @@ def main():
         time.sleep(0.5)
 
     except KeyboardInterrupt:
-
+        
+        quit_all()
         clear_all()
 
 
@@ -54,4 +71,5 @@ if __name__ == '__main__':
 
     except KeyboardInterrupt:
 
+        quit_all()
         clear_all()

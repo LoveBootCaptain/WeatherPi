@@ -21,17 +21,17 @@ THREADING_TIMER = config['THREADING_TIMER']
 # parameter for the request url
 FORECAST_URL = 'https://api.forecast.io/forecast/'  # endpoint for the API
 
-location_data = get_location()
+# location_data = get_location()
 
-latitude = location_data['lat']  # geolocation data for the request url
-longitude = location_data['lon']  # geolocation data for the request url
+LATITUDE = config['LATITUDE']       # location_data['lat']  # geolocation data for the request url
+LONGITUDE = config['LONGITUDE']     # location_data['lon']  # geolocation data for the request url
 
 options = '?lang=de&units=si&exclude=flags'  # some options, see details in API documentation
 
 
 # build and return the request url
 def get_request_url():
-    request_url = FORECAST_URL + FORECAST_IO_KEY + '/' + str(latitude) + ',' + str(longitude) + options  # build it
+    request_url = FORECAST_URL + FORECAST_IO_KEY + '/' + str(LATITUDE) + ',' + str(LONGITUDE) + options  # build it
 
     log_string('build request url: {}'.format(request_url))
 
