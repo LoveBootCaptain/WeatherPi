@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+[Service]
+WorkingDirectory=/home/pi/WeatherPi/
+ExecStart=/home/pi/WeatherPi/WeatherPi.py
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=notell
+User=root
+Group=root
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
