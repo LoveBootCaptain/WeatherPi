@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+[Unit]
+Description=WeatherPi
+Wants=network-online.target
+After=network.target network-online.target
+
 [Service]
 WorkingDirectory=/home/pi/WeatherPi/
 ExecStart=/home/pi/WeatherPi/WeatherPi.py
