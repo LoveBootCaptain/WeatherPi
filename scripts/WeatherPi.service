@@ -13,7 +13,7 @@ Restart=always
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=notell
-User=pi
+User=root
 Group=root
 Environment=NODE_ENV=production
 
