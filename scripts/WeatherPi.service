@@ -2,16 +2,18 @@
 [Unit]
 Description=WeatherPi
 Wants=network-online.target
-After=network.target network-online.target
+After=network-online.target
 
 [Service]
 WorkingDirectory=/home/pi/WeatherPi/
+ExecStartPre=/bin/sleep 5
 ExecStart=/home/pi/WeatherPi/WeatherPi.py
+ExecStopPost=/usr/bin/sudo /home/pi/WeatherPi/Modules/clear.py
 Restart=always
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=notell
-User=root
+User=pi
 Group=root
 Environment=NODE_ENV=production
 

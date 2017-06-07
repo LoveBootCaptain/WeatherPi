@@ -5,6 +5,7 @@ import json
 import os
 # from get_config import get_config
 # from init_sensor import *
+from get_latest_json import *
 from get_location import *
 from init_logging import *
 from init_blinkt import *
@@ -44,81 +45,89 @@ def update_latest_weather():
 
     log_string('get latest weather from forecast.io')
 
-    data = requests.get(get_request_url()).json()
+    try:
 
-    #  get sensor data inside
+        log_string('Try to get data online...')
+        data = requests.get(get_request_url(), timeout=5).json()
 
-    sensor_temp_inside = aio_sensors.receive('sensortempinside')
-    sensor_temp_inside = float(sensor_temp_inside.value)
+        #  get sensor data inside
 
-    log_string('fetched sensortempinside from adafruit.io: {}'.format(sensor_temp_inside))
+        sensor_temp_inside = aio_sensors.receive('sensortempinside')
+        sensor_temp_inside = float(sensor_temp_inside.value)
 
-    sensor_pressure_inside = aio_sensors.receive('sensorpressureinside')
-    sensor_pressure_inside = float(sensor_pressure_inside.value)
+        log_string('fetched sensortempinside from adafruit.io: {}'.format(sensor_temp_inside))
 
-    log_string('fetched sensorpressureinside from adafruit.io: {}'.format(sensor_pressure_inside))
+        sensor_pressure_inside = aio_sensors.receive('sensorpressureinside')
+        sensor_pressure_inside = float(sensor_pressure_inside.value)
 
-    sensor_humidity_inside = aio_sensors.receive('sensorhumidityinside')
-    sensor_humidity_inside = float(sensor_humidity_inside.value)
+        log_string('fetched sensorpressureinside from adafruit.io: {}'.format(sensor_pressure_inside))
 
-    log_string('fetched sensorhumidityinside from adafruit.io: {}'.format(sensor_humidity_inside))
+        sensor_humidity_inside = aio_sensors.receive('sensorhumidityinside')
+        sensor_humidity_inside = float(sensor_humidity_inside.value)
 
-    #  get sensor data outside
+        log_string('fetched sensorhumidityinside from adafruit.io: {}'.format(sensor_humidity_inside))
 
-    sensor_temp_outside = aio_sensors.receive('sensortempoutside')
-    sensor_temp_outside = float(sensor_temp_outside.value)
+        #  get sensor data outside
 
-    log_string('fetched sensortempoutside from adafruit.io: {}'.format(sensor_temp_outside))
+        sensor_temp_outside = aio_sensors.receive('sensortempoutside')
+        sensor_temp_outside = float(sensor_temp_outside.value)
 
-    sensor_pressure_outside = aio_sensors.receive('sensorpressureoutside')
-    sensor_pressure_outside = float(sensor_pressure_outside.value)
+        log_string('fetched sensortempoutside from adafruit.io: {}'.format(sensor_temp_outside))
 
-    log_string('fetched sensorpressureoutside from adafruit.io: {}'.format(sensor_pressure_outside))
+        sensor_pressure_outside = aio_sensors.receive('sensorpressureoutside')
+        sensor_pressure_outside = float(sensor_pressure_outside.value)
 
-    sensor_humidity_outside = aio_sensors.receive('sensorhumidityoutside')
-    sensor_humidity_outside = float(sensor_humidity_outside.value)
+        log_string('fetched sensorpressureoutside from adafruit.io: {}'.format(sensor_pressure_outside))
 
-    log_string('fetched sensorhumidityoutside from adafruit.io: {}'.format(sensor_humidity_outside))
+        sensor_humidity_outside = aio_sensors.receive('sensorhumidityoutside')
+        sensor_humidity_outside = float(sensor_humidity_outside.value)
 
-    blink('blue')
+        log_string('fetched sensorhumidityoutside from adafruit.io: {}'.format(sensor_humidity_outside))
 
-    data['currently']['sensor_temp_inside'] = sensor_temp_inside
-    data['currently']['sensor_pressure_inside'] = sensor_pressure_inside
-    data['currently']['sensor_humidity_inside'] = sensor_humidity_inside
+        blink('blue')
 
-    log_string('added sensor data to temporary json data: '
-               'temp. inside:{} - humidity inside: {} - pressure inside: {}'.format(
-                sensor_temp_inside,
-                sensor_humidity_inside,
-                sensor_pressure_inside
-                ))
+        data['currently']['sensor_temp_inside'] = sensor_temp_inside
+        data['currently']['sensor_pressure_inside'] = sensor_pressure_inside
+        data['currently']['sensor_humidity_inside'] = sensor_humidity_inside
 
-    data['currently']['sensor_temp_outside'] = sensor_temp_outside
-    data['currently']['sensor_pressure_outside'] = sensor_pressure_outside
-    data['currently']['sensor_humidity_outside'] = sensor_humidity_outside
+        log_string('added sensor data to temporary json data: '
+                   'temp. inside:{} - humidity inside: {} - pressure inside: {}'.format(
+                        sensor_temp_inside,
+                        sensor_humidity_inside,
+                        sensor_pressure_inside
+                    ))
 
-    log_string('added sensor data to temporary json data: '
-               'temp. outside:{} - humidity outside: {} - pressure outside: {}'.format(
-                sensor_temp_outside,
-                sensor_humidity_outside,
-                sensor_pressure_outside
-                ))
+        data['currently']['sensor_temp_outside'] = sensor_temp_outside
+        data['currently']['sensor_pressure_outside'] = sensor_pressure_outside
+        data['currently']['sensor_humidity_outside'] = sensor_humidity_outside
 
-    with open('/home/pi/WeatherPi/logs/latest_weather.json', 'w') as outputfile:
-        json.dump(data, outputfile, indent=2, sort_keys=True)
+        log_string('added sensor data to temporary json data: '
+                   'temp. outside:{} - humidity outside: {} - pressure outside: {}'.format(
+                        sensor_temp_outside,
+                        sensor_humidity_outside,
+                        sensor_pressure_outside
+                    ))
 
-    with open('/home/pi/WeatherPi/logs/current_weather.json', 'w') as outputfile:
-        json.dump(data['currently'], outputfile, indent=2, sort_keys=True)
+        with open('/home/pi/WeatherPi/logs/latest_weather.json', 'w') as outputfile:
+            json.dump(data, outputfile, indent=2, sort_keys=True)
 
-    log_string('json data saved to temporary file')
+        with open('/home/pi/WeatherPi/logs/current_weather.json', 'w') as outputfile:
+            json.dump(data['currently'], outputfile, indent=2, sort_keys=True)
 
-    os.system('cp /home/pi/WeatherPi/logs/latest_weather.json /var/www/html')
-    os.system('cp /home/pi/WeatherPi/logs/current_weather.json /var/www/html')
+        log_string('json data saved to temporary file')
 
-    log_string('json data copied to /var/www/html')
+        os.system('cp /home/pi/WeatherPi/logs/latest_weather.json /var/www/html')
+        os.system('cp /home/pi/WeatherPi/logs/current_weather.json /var/www/html')
 
-    blink('white')
+        log_string('json data copied to /var/www/html')
+
+        blink('white')
+
+    except StandardError:
+
+        log_string('ConnectionError - fallback to cached Data')
 
 
 if __name__ == '__main__':
+
     update_latest_weather()
