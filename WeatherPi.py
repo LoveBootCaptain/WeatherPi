@@ -7,12 +7,8 @@ from Modules.update_io import *
 from Modules.update_log import *
 from Modules.clear import *
 
-threads = []
-
 
 def quit_all():
-
-    global threads
 
     for thread in threads:
         thread.cancel()
@@ -20,13 +16,12 @@ def quit_all():
 
 
 def main():
-    global threads
 
-    thread = threading.Timer(THREADING_TIMER, main)
+    main_thread = threading.Timer(THREADING_TIMER, main)
 
-    thread.start()
+    main_thread.start()
 
-    threads.append(thread)
+    threads.append(main_thread)
 
     try:
 
@@ -59,6 +54,8 @@ if __name__ == '__main__':
 
     try:
 
+        RUNNING = True
+
         matrix_init()
         unicorn_init()
         blinkt_init()
@@ -70,6 +67,8 @@ if __name__ == '__main__':
         update_unicorn()
 
     except KeyboardInterrupt:
+
+        RUNNING = False
 
         quit_all()
         clear_all()

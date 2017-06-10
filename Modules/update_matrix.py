@@ -16,6 +16,8 @@ config = get_config()
 
 THREADING_TIMER = config['THREADING_TIMER']
 
+threads = []
+
 
 def update_matrix():
 
@@ -97,10 +99,14 @@ colon_on = True
 
 def update_clock_matrix():
 
+    global threads
+
     try:
 
-        t = threading.Timer(1, update_clock_matrix)
-        t.start()
+        clock_timer = threading.Timer(1, update_clock_matrix)
+        clock_timer.start()
+
+        threads.append(clock_timer)
 
         global colon_on
 

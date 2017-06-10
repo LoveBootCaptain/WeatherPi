@@ -21,6 +21,8 @@ folder_path = '/home/pi/WeatherPi/Modules/Animations/'
 
 icon_extension = '.' + 'png'
 
+RUNNING = False
+
 
 def get_icon():
 
@@ -76,13 +78,13 @@ def get_icon_path():
 
 def update_unicorn():
 
-    global img_file
+    global img_file, RUNNING
 
     unicorn.clear()
 
     log_string('Start Unicorn image loop')
 
-    while img_file:
+    while RUNNING:
 
         img = Image.open(img_file)
 
@@ -111,13 +113,13 @@ def test_unicorn():
 
     print('Testing all images in folder {}'.format(folder_path))
 
-    for file in os.listdir(folder_path):
+    for image in os.listdir(folder_path):
 
-        if file.endswith(icon_extension):
+        if image.endswith(icon_extension):
 
-            print('Testing image: {}'.format(folder_path + file))
+            print('Testing image: {}'.format(folder_path + image))
 
-            img = Image.open(folder_path + file)
+            img = Image.open(folder_path + image)
 
             draw_unicorn(img)
 
@@ -129,15 +131,20 @@ def test_unicorn():
 if __name__ == '__main__':
 
     try:
+        RUNNING = True
 
         unicorn_init()
 
         test_unicorn()
 
         get_icon_path()
+
         update_unicorn()
 
     except KeyboardInterrupt:
+
+        RUNNING = False
+
         unicorn.clear()
         unicorn.show()
-        exit()
+
