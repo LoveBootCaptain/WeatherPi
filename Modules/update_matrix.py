@@ -8,6 +8,7 @@ from get_sensor_data import *
 from init_blinkt import *
 from init_logging import *
 from init_matrix import *
+from WeatherPi import quit_all
 
 # read the config file
 config = get_config()
@@ -136,7 +137,9 @@ def update_clock_matrix():
 
     except KeyboardInterrupt:
 
+        quit_all()
         clear_all()
+
 
 if __name__ == '__main__':
 

@@ -60,7 +60,7 @@ def update_log():
     log_string_base = '[timestamp={}], [temp_api={}], [sensor_temp_inside={}], [sensor_temp_outside={}], ' \
                       '[rain_percentage={}], [sensor_pressure_inside={}], [sensor_humidity_inside={}],' \
                       ' [sensor_pressure_outside={}], [sensor_humidity_outside={}], [summary="{}"],' \
-                      ' [next_weather_today="{}"], [latitude={}], [longitude={}], [location={}]'.format(
+                      ' [next_weather_today="{}"], [latitude={}], [longitude={}]]'.format(
                         timestamp,
                         temperature,
                         sensor_temp_inside,

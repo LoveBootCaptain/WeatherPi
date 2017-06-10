@@ -25,23 +25,12 @@ def main():
     try:
 
         update_latest_weather()
-        # time.sleep(0.5)
-
         update_log()
-        # time.sleep(0.5)
-
         update_matrix()
         update_bargraph()
-        # time.sleep(0.5)
-
         update_io_thing_speak()
-        # time.sleep(0.5)
-
         update_io_adafruit()
-        # time.sleep(0.5)
-
         get_icon_path()
-        # time.sleep(0.5)
 
     except KeyboardInterrupt:
         
@@ -52,8 +41,6 @@ def main():
 if __name__ == '__main__':
 
     try:
-
-        # RUNNING = True
 
         matrix_init()
         unicorn_init()
@@ -66,8 +53,6 @@ if __name__ == '__main__':
         update_unicorn()
 
     except KeyboardInterrupt:
-
-        # RUNNING = False
 
         quit_all()
         clear_all()
