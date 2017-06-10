@@ -4,7 +4,7 @@ import threading
 import time
 from init_matrix import *
 from get_sensor_data import *
-from get_api_data import *
+
 from init_blinkt import *
 from get_rain_forecast import *
 from init_logging import *
