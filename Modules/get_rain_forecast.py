@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from Fonts.custom_font import *
-# from init_logging import *
 from get_latest_json import *
 
 OFF = 0

@@ -1,16 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# import threading
-import json
 import os
-# from get_config import get_config
-# from init_sensor import *
+
 from get_latest_json import *
-from get_location import *
-from init_logging import *
 from init_blinkt import *
 from init_io import *
-
 
 # read the config file
 config = get_config()
@@ -22,10 +16,8 @@ THREADING_TIMER = config['THREADING_TIMER']
 # parameter for the request url
 FORECAST_URL = 'https://api.forecast.io/forecast/'  # endpoint for the API
 
-# location_data = get_location()
-
-LATITUDE = config['LATITUDE']       # location_data['lat']  # geolocation data for the request url
-LONGITUDE = config['LONGITUDE']     # location_data['lon']  # geolocation data for the request url
+LATITUDE = config['LATITUDE']
+LONGITUDE = config['LONGITUDE']
 
 options = '?lang=de&units=si&exclude=flags'  # some options, see details in API documentation
 

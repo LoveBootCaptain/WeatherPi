@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from init_io import *
-# from init_logging import *
 
 
 # Define a function to convert celsius to fahrenheit.

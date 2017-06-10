@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 # create some logger details
-import socket
 import logging.handlers
+import socket
 
 host = socket.gethostname()
 

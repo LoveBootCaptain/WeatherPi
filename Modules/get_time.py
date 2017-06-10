@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import time
 import threading
+import time
+
 from Fonts import custom_font
-# from init_logging import *
 
 hours_colon = custom_font.hours
 hours_no_colon = custom_font.hours_no_colon

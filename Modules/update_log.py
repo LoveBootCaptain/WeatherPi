@@ -1,12 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# import threading
 from datetime import datetime
-# from init_logging import *
+
 from get_latest_json import *
-from get_location import *
 from init_blinkt import *
-from get_config import get_config
 
 # read the config file
 config = get_config()
@@ -22,8 +19,6 @@ def get_timestamp():
 
 
 def update_log():
-
-    # threading.Timer(THREADING_TIMER, update_log).start()
 
     json_data = get_latest_json()
 
@@ -59,11 +54,8 @@ def update_log():
         hourly_forecast.encode('UTF-8')
     )
 
-    location_data = get_location()
-
-    location = location_data['city']
-    latitude = location_data['lat']  # geolocation data for the request url
-    longitude = location_data['lon']  # geolocation data for the request url
+    latitude = config['LATITUDE']
+    longitude = config['LONGITUDE']
 
     log_string_base = '[timestamp={}], [temp_api={}], [sensor_temp_inside={}], [sensor_temp_outside={}], ' \
                       '[rain_percentage={}], [sensor_pressure_inside={}], [sensor_humidity_inside={}],' \
@@ -81,8 +73,7 @@ def update_log():
                         summary,
                         io_str,
                         latitude,
-                        longitude,
-                        location
+                        longitude
                         )
 
     # write log_string to log file

@@ -1,14 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import time
-# import threading
-from get_latest_json import *
+import os.path
+
 from PIL import Image
-from init_unicorn import *
+
+from get_config import get_config
+from get_latest_json import *
 from init_blinkt import *
 from init_logging import *
-from get_config import get_config
-import os.path
+from init_unicorn import *
 
 # read the config file
 config = get_config()
@@ -21,7 +21,7 @@ folder_path = '/home/pi/WeatherPi/Modules/Animations/'
 
 icon_extension = '.' + 'png'
 
-RUNNING = False
+# RUNNING = False
 
 
 def get_icon():
@@ -78,13 +78,13 @@ def get_icon_path():
 
 def update_unicorn():
 
-    global img_file, RUNNING
+    global img_file
 
     unicorn.clear()
 
     log_string('Start Unicorn image loop')
 
-    while RUNNING:
+    while img_file:
 
         img = Image.open(img_file)
 
@@ -131,7 +131,7 @@ def test_unicorn():
 if __name__ == '__main__':
 
     try:
-        RUNNING = True
+        # RUNNING = True
 
         unicorn_init()
 
@@ -143,7 +143,7 @@ if __name__ == '__main__':
 
     except KeyboardInterrupt:
 
-        RUNNING = False
+        # RUNNING = False
 
         unicorn.clear()
         unicorn.show()

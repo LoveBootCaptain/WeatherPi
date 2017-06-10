@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import urllib
-# import threading
+
 from get_latest_json import *
 from init_blinkt import *
 from init_io import *

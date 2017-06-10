@@ -1,11 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from Modules.update_io import *
 from Modules.update_latest_weather import *
+from Modules.update_log import *
 from Modules.update_matrix import *
 from Modules.update_unicorn import *
-from Modules.update_io import *
-from Modules.update_log import *
-from Modules.clear import *
 
 
 def quit_all():
@@ -26,23 +25,23 @@ def main():
     try:
 
         update_latest_weather()
-        time.sleep(0.5)
+        # time.sleep(0.5)
 
         update_log()
-        time.sleep(0.5)
+        # time.sleep(0.5)
 
         update_matrix()
         update_bargraph()
-        time.sleep(0.5)
+        # time.sleep(0.5)
 
         update_io_thing_speak()
-        time.sleep(0.5)
+        # time.sleep(0.5)
 
         update_io_adafruit()
-        time.sleep(0.5)
+        # time.sleep(0.5)
 
         get_icon_path()
-        time.sleep(0.5)
+        # time.sleep(0.5)
 
     except KeyboardInterrupt:
         
@@ -54,7 +53,7 @@ if __name__ == '__main__':
 
     try:
 
-        RUNNING = True
+        # RUNNING = True
 
         matrix_init()
         unicorn_init()
@@ -68,7 +67,7 @@ if __name__ == '__main__':
 
     except KeyboardInterrupt:
 
-        RUNNING = False
+        # RUNNING = False
 
         quit_all()
         clear_all()

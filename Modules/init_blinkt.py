@@ -1,7 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import blinkt
 import time
+
+import blinkt
+
 from get_config import get_config
 from init_logging import *
 

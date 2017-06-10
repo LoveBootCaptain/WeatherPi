@@ -1,15 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import threading
-import time
-from init_matrix import *
-from get_sensor_data import *
 
-from init_blinkt import *
-from get_rain_forecast import *
-from init_logging import *
-from get_config import get_config
 from clear import clear_all
+from get_rain_forecast import *
+from get_sensor_data import *
+from init_blinkt import *
+from init_logging import *
+from init_matrix import *
 
 # read the config file
 config = get_config()
