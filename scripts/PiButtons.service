@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+[Unit]
+Description=PiButtons
+
+[Service]
+WorkingDirectory=/home/pi/WeatherPi/Modules/
+ExecStart=/home/pi/WeatherPi/Modules/init_buttons.py
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=notell
+User=root
+Group=root
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
