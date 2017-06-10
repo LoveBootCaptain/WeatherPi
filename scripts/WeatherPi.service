@@ -6,7 +6,7 @@ After=network-online.target
 
 [Service]
 WorkingDirectory=/home/pi/WeatherPi/
-ExecStartPre=/bin/sleep 5
+ExecStartPre=/home/pi/WeatherPi/Modules/clear.py
 ExecStart=/home/pi/WeatherPi/WeatherPi.py
 ExecStopPost=/home/pi/WeatherPi/Modules/clear.py
 Restart=always
