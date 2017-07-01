@@ -1,17 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import urllib
+import requests
 
 from get_latest_json import *
 from init_blinkt import *
 from init_io import *
 
-THREADING_TIMER = config['THREADING_TIMER']
-
 
 def update_io_thing_speak():
-
-    # threading.Timer(THREADING_TIMER, update_io_thing_speak).start()
 
     json_data = get_latest_json()
 
@@ -35,24 +31,23 @@ def update_io_thing_speak():
     )
 
     try:
-        connection = urllib.urlopen(io_url)
 
-        connection.read()
+        log_string('Try sending data to ThingSpeak IO')
+
+        connection = requests.get(io_url)
+
+        print('Status: {}'.format(connection))
 
         log_string('Send data to ThingSpeak IO: {}'.format(io_url))
 
-        connection.close()
-
         blink('blue')
 
-    except IOError:
+    except StandardError as e:
 
-        log_string('ThingSpeak IO - Connection Error')
+        log_string('ThingSpeak IO - {} Error'.format(e))
 
 
 def update_io_adafruit():
-
-    # threading.Timer(THREADING_TIMER, update_io_adafruit).start()
 
     json_data = get_latest_json()
 
@@ -97,17 +92,19 @@ def update_io_adafruit():
     }
 
     log_string('package for adafruit io: {}'.format(feed_list))
+    log_string('Try sending data to Adafruit IO')
 
     for feed, value in feed_list.items():
 
         try:
+
             aio_dashboard.send(feed, value)
 
             log_string('{}={} successfully send to adafruit.io'.format(feed, value))
 
-        except IOError:
+        except StandardError as e:
 
-            log_string('Adafruit IO - Connection Error - Feed: {} - Value: {}'.format(feed, value))
+            log_string('Adafruit IO - {} Error - Feed: {} - Value: {}'.format(e, feed, value))
 
     blink('blue')
 
