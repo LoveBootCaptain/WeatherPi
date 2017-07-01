@@ -6,24 +6,25 @@ from PIL import Image
 
 from get_latest_json import *
 from init_blinkt import *
-from init_logging import *
 from init_unicorn import *
-
 
 # read the config file
 config = get_config()
 
 THREADING_TIMER = config['THREADING_TIMER']
 
-img_file = '/home/pi/WeatherPi/Modules/Animations/error.png'
-
 folder_path = '/home/pi/WeatherPi/Modules/Animations/'
+
+version_path = config['UNICORN_VERSION'] + '/'
 
 icon_extension = '.' + 'png'
 
+img_file = folder_path + version_path + 'error' + icon_extension
+
+width, height = unicorn.get_shape()
+
 
 def get_icon():
-
     # known conditions: clear-day, clear-night, partly-cloudy-day, partly-cloudy-night, wind, cloudy, rain, snow, fog
 
     json_data = get_latest_json()
@@ -36,12 +37,11 @@ def get_icon():
 
 
 def get_icon_path():
-
     global img_file
 
     icon = get_icon()
 
-    icon_path = folder_path + icon + icon_extension
+    icon_path = folder_path + version_path + icon + icon_extension
 
     log_string('The icon path should be: {}. Checking it...'.format(icon_path))
 
@@ -67,7 +67,7 @@ def get_icon_path():
 
         # set new icon_path
 
-        icon_path = '/home/pi/WeatherPi/Modules/Animations/error.png'
+        icon_path = folder_path + version_path + 'error' + icon_extension
 
         img_file = icon_path
 
@@ -75,7 +75,6 @@ def get_icon_path():
 
 
 def update_unicorn():
-
     unicorn.clear()
 
     global img_file
@@ -83,41 +82,43 @@ def update_unicorn():
     log_string('Start Unicorn image loop')
 
     while img_file:
-
         img = Image.open(img_file)
 
         draw_unicorn(img)
 
 
 def draw_unicorn(image):
+    for o_x in range(int(image.size[0] / width)):
 
-    for o_x in range(int(image.size[0] / 8)):
+        for o_y in range(int(image.size[1] / height)):
 
-        for o_y in range(int(image.size[1] / 8)):
+            valid = False
 
-            for x in range(8):
+            for x in range(width):
 
-                for y in range(8):
-                    pixel = image.getpixel(((o_x * 8) + y, (o_y * 8) + x))
+                for y in range(height):
+                    pixel = image.getpixel(((o_x * width) + y, (o_y * height) + x))
                     # print(pixel)
                     r, g, b = int(pixel[0]), int(pixel[1]), int(pixel[2])
+                    if r or g or b:
+                        valid = True
                     unicorn.set_pixel(x, y, r, g, b)
 
-            unicorn.show()
-            time.sleep(0.25)
+            if valid:
+                unicorn.show()
+                time.sleep(0.25)
 
 
 def test_unicorn():
-
-    print('Testing all images in folder {}'.format(folder_path))
+    print('Testing all images in folder {}'.format(folder_path + version_path))
 
     for image in os.listdir(folder_path):
 
         if image.endswith(icon_extension):
 
-            print('Testing image: {}'.format(folder_path + image))
+            print('Testing image: {}'.format(folder_path + version_path + image))
 
-            img = Image.open(folder_path + image)
+            img = Image.open(folder_path + version_path + image)
 
             draw_unicorn(img)
 
@@ -126,17 +127,41 @@ def test_unicorn():
             print('Not using this file, not an image: {}'.format(file))
 
 
+def test_unicornhd():
+    test_file = folder_path + version_path + 'clear-day.png'
+
+    img = Image.open(test_file)
+
+    try:
+        while True:
+            for o_x in range(int(img.size[0] / width)):
+                for o_y in range(int(img.size[1] / height)):
+
+                    valid = False
+                    for x in range(width):
+                        for y in range(height):
+                            pixel = img.getpixel(((o_x * width) + y, (o_y * height) + x))
+                            r, g, b = int(pixel[0]), int(pixel[1]), int(pixel[2])
+                            if r or g or b:
+                                valid = True
+                            unicorn.set_pixel(x, y, r, g, b)
+                    if valid:
+                        unicorn.show()
+                        time.sleep(0.5)
+    except KeyboardInterrupt:
+        unicorn.off()
+
+
 if __name__ == '__main__':
 
     try:
 
         unicorn_init()
-        test_unicorn()
-        get_icon_path()
-        update_unicorn()
+        test_unicornhd()
+        # get_icon_path()
+        # update_unicorn()
 
     except KeyboardInterrupt:
 
         unicorn.clear()
         unicorn.show()
-
