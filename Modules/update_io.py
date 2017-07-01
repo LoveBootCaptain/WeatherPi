@@ -36,7 +36,7 @@ def update_io_thing_speak():
 
         connection = requests.get(io_url)
 
-        print('Status: {}'.format(connection))
+        log_string('Status: {}'.format(connection))
 
         log_string('Send data to ThingSpeak IO: {}'.format(io_url))
 
