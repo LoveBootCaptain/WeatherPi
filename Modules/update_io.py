@@ -35,11 +35,15 @@ def update_io_thing_speak():
 
         log_string('Try sending data to ThingSpeak IO')
 
-        connection = requests.get(THINGSPEAK_URL, params=payload)
+        connection = requests.get(THINGSPEAK_URL, params=payload, timeout=2)
 
-        log_string('Status Code: {}'.format(connection))
+        data_id = connection.json()
 
         log_string('Send data to ThingSpeak IO: {}'.format(connection.url))
+
+        log_string('Status Code: {}'.format(connection.status_code))
+
+        log_string('Data ID: {}'.format(data_id))
 
         blink('blue')
 
@@ -113,4 +117,4 @@ def update_io_adafruit():
 if __name__ == '__main__':
 
     update_io_thing_speak()
-    update_io_adafruit()
+    # update_io_adafruit()
