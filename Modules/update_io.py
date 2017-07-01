@@ -21,24 +21,25 @@ def update_io_thing_speak():
     sensor_pressure_outside = json_data['currently']['sensor_pressure_outside']
     sensor_humidity_outside = json_data['currently']['sensor_humidity_outside']
 
-    io_url = BASE_URL + '&field1={}&field2={}&field3={}&field4={}&field5={}&field6={}'.format(
-        round(api_temperature, 2),
-        round(sensor_temp_outside, 2),
-        round(sensor_temp_inside, 2),
-        round(rain_percentage, 2),
-        round(sensor_pressure_outside, 2),
-        round(sensor_humidity_outside, 2)
-    )
+    payload = {
+        'api_key': THINGSPEAK_API_KEY,
+        'field1': round(api_temperature, 2),
+        'field2': round(sensor_temp_outside, 2),
+        'field3': round(sensor_temp_inside, 2),
+        'field4': round(rain_percentage, 2),
+        'field5': round(sensor_pressure_outside, 2),
+        'field6': round(sensor_humidity_outside, 2)
+    }
 
     try:
 
         log_string('Try sending data to ThingSpeak IO')
 
-        connection = requests.get(io_url)
+        connection = requests.get(THINGSPEAK_URL, params=payload)
 
-        log_string('Status: {}'.format(connection))
+        log_string('Status Code: {}'.format(connection))
 
-        log_string('Send data to ThingSpeak IO: {}'.format(io_url))
+        log_string('Send data to ThingSpeak IO: {}'.format(connection.url))
 
         blink('blue')
 

@@ -14,5 +14,5 @@ aio_dashboard = Client(ADAFRUIT_IO_KEY_DASHBOARD)
 aio_sensors = Client(ADAFRUIT_IO_KEY_SENSORS)
 
 THINGSPEAK_API_KEY = config['THINGSPEAK_API_KEY']
-THINGSPEAK_URL = 'https://api.thingspeak.com/update?api_key='
-BASE_URL = THINGSPEAK_URL + THINGSPEAK_API_KEY
+THINGSPEAK_URL = 'https://api.thingspeak.com/update'
+
