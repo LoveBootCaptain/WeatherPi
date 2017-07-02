@@ -11,8 +11,6 @@ from init_unicorn import *
 # read the config file
 config = get_config()
 
-THREADING_TIMER = config['THREADING_TIMER']
-
 folder_path = '/home/pi/WeatherPi/Modules/Animations/'
 
 version_path = config['UNICORN_VERSION'] + '/'
@@ -82,12 +80,20 @@ def update_unicorn():
     log_string('Start Unicorn image loop')
 
     while img_file:
+
         img = Image.open(img_file)
 
         draw_unicorn(img)
 
+    else:
+
+        log_string('Something went wrong while picing up the img')
+        return
+
 
 def draw_unicorn(image):
+    # this is the original pimoroni function for drawing sprites
+
     for o_x in range(int(image.size[0] / width)):
 
         for o_y in range(int(image.size[1] / height)):
@@ -130,39 +136,14 @@ def test_unicorn():
     unicorn.show()
 
 
-def test_unicornhd():
-    test_file = folder_path + version_path + 'clear-day.png'
-
-    img = Image.open(test_file)
-
-    try:
-        while True:
-            for o_x in range(int(img.size[0] / width)):
-                for o_y in range(int(img.size[1] / height)):
-
-                    valid = False
-                    for x in range(width):
-                        for y in range(height):
-                            pixel = img.getpixel(((o_x * width) + y, (o_y * height) + x))
-                            r, g, b = int(pixel[0]), int(pixel[1]), int(pixel[2])
-                            if r or g or b:
-                                valid = True
-                            unicorn.set_pixel(x, y, r, g, b)
-                    if valid:
-                        unicorn.show()
-                        time.sleep(0.5)
-    except KeyboardInterrupt:
-        unicorn.off()
-
-
 if __name__ == '__main__':
 
     try:
 
         unicorn_init()
         test_unicorn()
-        # get_icon_path()
-        # update_unicorn()
+        get_icon_path()
+        update_unicorn()
 
     except KeyboardInterrupt:
 
