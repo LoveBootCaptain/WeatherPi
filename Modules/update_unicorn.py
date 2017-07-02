@@ -139,11 +139,11 @@ def test_unicorn():
 def draw_single_icon(animation):
     unicorn.clear()
 
-    test_file = folder_path + version_path + animation + icon_extension
+    single_file = folder_path + version_path + animation + icon_extension
 
-    log_string('Start testing single animation: {}'.format(animation))
+    log_string('Start drawing single icon or animation: {}'.format(animation))
 
-    img = Image.open(test_file)
+    img = Image.open(single_file)
 
     draw_unicorn(img)
 
