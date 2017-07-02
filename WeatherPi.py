@@ -1,7 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import subprocess
-
 from Modules.update_io import *
 from Modules.update_latest_weather import *
 from Modules.update_log import *
