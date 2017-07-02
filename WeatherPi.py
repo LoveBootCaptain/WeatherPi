@@ -1,5 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import subprocess
+
 from Modules.update_io import *
 from Modules.update_latest_weather import *
 from Modules.update_log import *
@@ -45,6 +47,8 @@ if __name__ == '__main__':
         matrix_init()
         unicorn_init()
         blinkt_init()
+
+        draw_single_icon('raspberry_boot')
 
         update_clock_matrix()
 

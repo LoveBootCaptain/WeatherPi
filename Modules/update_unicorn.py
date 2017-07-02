@@ -87,7 +87,7 @@ def update_unicorn():
 
     else:
 
-        log_string('Something went wrong while picing up the img')
+        log_string('Something went wrong while picking up the img')
         return
 
 
@@ -136,11 +136,24 @@ def test_unicorn():
     unicorn.show()
 
 
+def draw_single_icon(animation):
+    unicorn.clear()
+
+    test_file = folder_path + version_path + animation + icon_extension
+
+    log_string('Start testing single animation: {}'.format(animation))
+
+    img = Image.open(test_file)
+
+    draw_unicorn(img)
+
+
 if __name__ == '__main__':
 
     try:
 
         unicorn_init()
+        draw_single_icon('raspberry_boot')
         test_unicorn()
         get_icon_path()
         update_unicorn()
