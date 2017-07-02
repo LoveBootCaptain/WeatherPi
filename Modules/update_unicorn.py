@@ -112,7 +112,7 @@ def draw_unicorn(image):
 def test_unicorn():
     print('Testing all images in folder {}'.format(folder_path + version_path))
 
-    for image in os.listdir(folder_path):
+    for image in os.listdir(folder_path + version_path):
 
         if image.endswith(icon_extension):
 
@@ -125,6 +125,9 @@ def test_unicorn():
         else:
 
             print('Not using this file, not an image: {}'.format(file))
+
+    unicorn.clear()
+    unicorn.show()
 
 
 def test_unicornhd():
@@ -157,7 +160,7 @@ if __name__ == '__main__':
     try:
 
         unicorn_init()
-        test_unicornhd()
+        test_unicorn()
         # get_icon_path()
         # update_unicorn()
 
