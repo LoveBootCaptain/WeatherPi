@@ -29,7 +29,12 @@ else:
 
 def unicorn_init():
     unicorn.brightness(BRIGHTNESS)
-    unicorn.rotation(0)
+    if UNICORN_VERSION == "HD":
+        unicorn.rotation(0)
+    elif UNICORN_VERSION == "SD":
+        unicorn.rotation(90)
+    else:
+        log_string('No valid Unicorn Version found in config file - use "SD" or "HD"')
     unicorn.clear()
     unicorn.show()
 
