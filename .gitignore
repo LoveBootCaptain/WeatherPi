@@ -96,3 +96,6 @@ ENV/
 
 
 /.travis.yml
+/Modules/_test_sensor.py
+/Modules/_test_timer.py
+/Modules/_test_unicorn.py

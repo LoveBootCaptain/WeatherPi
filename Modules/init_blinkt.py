@@ -4,11 +4,11 @@ import time
 
 import blinkt
 
-from get_config import get_config
-from init_logging import *
+from Config import Config
+from init_logging import log_string
 
 # read the config file
-config = get_config()
+config = Config().get_config()
 
 BRIGHTNESS = config['BLINKT_BRIGHTNESS']
 

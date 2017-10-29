@@ -1,12 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from Modules.update_io import *
-from Modules.update_latest_weather import *
-from Modules.update_log import *
-from Modules.update_matrix import *
-from Modules.update_unicorn import *
-
 from multiprocessing import Process
+
+from Modules.UpdateIO import UpdateIO
+from Modules.UpdateLog import UpdateLog
+from Modules.update_matrix import *
+from Modules.UpdateUnicorn import UpdateIcon
+from Modules.UpdateUnicorn import UniCorn
+
+from Modules.init_unicorn import unicorn_init
 
 processes_bar = []
 
@@ -28,8 +30,10 @@ def main():
 
     try:
 
-        update_latest_weather()
-        update_log()
+        Update().update_json()
+
+        UpdateLog().create_log()
+
         update_matrix()
 
         p = Process(target=update_bargraph)
@@ -40,10 +44,9 @@ def main():
         p.start()
         processes_bar.append(p)
 
-        update_io_thing_speak()
-        update_io_adafruit()
+        UpdateIO().send_iot_data()
 
-        get_icon_path()
+        UpdateIcon().set_icon_path()
 
     except KeyboardInterrupt:
         
@@ -59,13 +62,13 @@ if __name__ == '__main__':
         unicorn_init()
         blinkt_init()
 
-        draw_single_icon('raspberry_boot')
+        UniCorn().draw_single_icon('raspberry_boot')
 
         update_clock_matrix()
 
         main()
 
-        update_unicorn()
+        UniCorn().update_unicorn()
 
     except KeyboardInterrupt:
 

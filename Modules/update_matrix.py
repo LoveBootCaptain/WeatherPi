@@ -2,37 +2,39 @@
 # -*- coding: utf-8 -*-
 import threading
 
-from clear import clear_all
-from get_rain_forecast import *
-from get_sensor_data import *
-from init_blinkt import *
-from init_logging import *
-from init_matrix import *
+from RainData import RainData
+from SensorData import SensorData
+from Fonts.custom_font import *
 from check_alarms import *
-from WeatherPi import quit_all
+from clear import clear_all
+from init_blinkt import *
+from init_matrix import *
 
 # read the config file
-config = get_config()
+config = Config().get_config()
 
 THREADING_TIMER = config['THREADING_TIMER']
 
 threads = []
 
+OFF = 0
+GREEN = 1
+RED = 2
+YELLOW = 3
+
 
 def update_matrix():
 
-    # threading.Timer(THREADING_TIMER, update_matrix).start()
-
-    sensor_temp_outside = get_sensor_temp_outside()
-    rain_probability = get_rain_probability()
-    sensor_temp_inside = get_sensor_temp_inside()
+    sensor_temp_outside = SensorData().temp_outside()
+    rain_probability = RainData().rain_probability()
+    sensor_temp_inside = SensorData().temp_inside()
 
     update_list = {
         1: ('Grüne Matrix', matrix_green, 'sensor_temp_outside', sensor_temp_outside),
         2: ('Orange Matrix', matrix_orange, 'rain_probability', rain_probability),
         3: ('Rote Matrix', matrix_red, 'sensor_temp_inside', sensor_temp_inside)
     }
-
+    print(update_list)
     try:
 
         for matrix, value in update_list.items():
@@ -137,7 +139,7 @@ def set_bars(forecast):
 
                 blink_bar(max_alarm_duration, forecast, RED)
 
-            else:
+            elif alarm['severity'] == 'watch':
                 max_alarm = max(alarms[idx]['duration'] for idx, alarm in enumerate(alarms))
                 max_alarm_duration = int(max_alarm)
 
@@ -145,6 +147,15 @@ def set_bars(forecast):
                     max_alarm_duration += 1
 
                 blink_bar(max_alarm_duration, forecast, YELLOW)
+
+            elif alarm['severity'] == 'advisory':
+                max_alarm = alarm['duration']
+                max_alarm_duration = int(max_alarm)
+
+                if max_alarm_duration == 0:
+                    max_alarm_duration += 1
+
+                blink_bar(max_alarm_duration, forecast, GREEN)
 
     else:
 
@@ -164,7 +175,7 @@ def update_bargraph():
 
     try:
 
-        rain_forecast = get_rain_forecast()
+        rain_forecast = RainData().rain_forecast()
 
         set_bars(rain_forecast)
 
@@ -233,7 +244,7 @@ def update_clock_matrix():
 
     except KeyboardInterrupt:
 
-        quit_all()
+        # quit_all()
         clear_all()
 
 

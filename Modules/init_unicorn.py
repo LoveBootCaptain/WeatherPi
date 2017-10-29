@@ -1,11 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from get_config import get_config
+from Config import Config
 from init_logging import *
 
 # read the config file
-config = get_config()
+config = Config().get_config()
 
 UNICORN_VERSION = config['UNICORN_VERSION']
 BRIGHTNESS = config['UNICORN_BRIGHTNESS']
@@ -15,6 +15,7 @@ if UNICORN_VERSION == "HD":
     import unicornhathd as unicorn
 
     log_string('Unicorn Version set to HD')
+
 
 elif UNICORN_VERSION == "SD":
 
@@ -29,6 +30,7 @@ else:
 
 def unicorn_init():
     unicorn.brightness(BRIGHTNESS)
+
     if UNICORN_VERSION == "HD":
         unicorn.rotation(0)
     elif UNICORN_VERSION == "SD":

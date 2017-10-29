@@ -1,12 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import json
 import time
-from get_latest_json import *
-
 from collections import namedtuple
 from datetime import datetime
 
+from Update import Update
 
 TFM = '%d.%m.%Y %H:%M:%S'
 
@@ -17,7 +15,7 @@ def time_convert(time_stamp):
 
 def check_alarms():
 
-    weather = get_latest_json()
+    weather = Update().json_data
 
     alarms = {}
 
@@ -54,6 +52,14 @@ def check_alarms():
 
                 log_string('watch Alarm: {}'.format(alarm))
                 alarms[idx] = {'severity': alarm.severity, 'duration': alarm_lasts}
+
+            elif alarm.severity == 'advisory':
+
+                log_string('watch Alarm: {}'.format(alarm))
+                alarms[idx] = {'severity': alarm.severity, 'duration': alarm_lasts}
+
+            else:
+                alarms = None
 
         log_string('Alle Wetter Alarme: {}'.format(alarms))
         return alarms
