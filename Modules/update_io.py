@@ -117,4 +117,4 @@ def update_io_adafruit():
 if __name__ == '__main__':
 
     update_io_thing_speak()
-    # update_io_adafruit()
+    update_io_adafruit()
