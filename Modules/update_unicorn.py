@@ -88,7 +88,7 @@ def update_unicorn():
     else:
 
         log_string('Something went wrong while picking up the img')
-        return
+        pass
 
 
 def draw_unicorn(image):

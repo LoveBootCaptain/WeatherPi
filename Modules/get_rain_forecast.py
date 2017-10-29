@@ -31,8 +31,7 @@ def get_rain_probability():
 
     log_string('Regenwahrscheinlichkeit als String für Output: {}%'.format(rain_probability_data))
 
-    the_output_data = digits[rain_probability_data[0]] + digits[rain_probability_data[1]] + \
-                      temp_digits[percent[0]]
+    the_output_data = digits[rain_probability_data[0]] + digits[rain_probability_data[1]] + temp_digits[percent[0]]
 
     return the_output_data
 
