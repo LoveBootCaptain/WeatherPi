@@ -20,7 +20,6 @@
 # THE SOFTWARE.
 
 import logging
-import math
 
 # Default I2C address for device.
 MCP9808_I2CADDR_DEFAULT = 0x18

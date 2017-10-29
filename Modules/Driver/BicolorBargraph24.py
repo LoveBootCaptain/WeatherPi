@@ -22,7 +22,6 @@ from __future__ import division
 
 import HT16K33
 
-
 # Color values as convenient globals.
 # This is a bitmask value where the first bit is green, and the second bit is
 # red.  If both bits are set the color is yellow (red + green light).
