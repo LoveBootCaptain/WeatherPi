@@ -132,11 +132,17 @@ def set_bars(forecast):
                 max_alarm = alarm['duration']
                 max_alarm_duration = int(max_alarm)
 
+                if max_alarm_duration == 0:
+                    max_alarm_duration += 1
+
                 blink_bar(max_alarm_duration, forecast, RED)
 
             else:
                 max_alarm = max(alarms[idx]['duration'] for idx, alarm in enumerate(alarms))
                 max_alarm_duration = int(max_alarm)
+
+                if max_alarm_duration == 0:
+                    max_alarm_duration += 1
 
                 blink_bar(max_alarm_duration, forecast, YELLOW)
 

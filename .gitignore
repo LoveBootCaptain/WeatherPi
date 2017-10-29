@@ -89,6 +89,10 @@ ENV/
 .ropeproject
 /logs/latest_weather.json
 /config.json
-.idea/*
 .idea
 
+/logs/test_weather_with_alarm.json
+.DS_Store
+
+
+/.travis.yml

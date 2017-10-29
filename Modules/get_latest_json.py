@@ -8,7 +8,7 @@ from init_logging import *
 def get_latest_json():
 
     try:
-
+        # data = open('/home/pi/WeatherPi/logs/test_weather_with_alarm.json').read()
         data = open('/home/pi/WeatherPi/logs/latest_weather.json').read()
 
         json_data = json.loads(data)
