@@ -43,8 +43,8 @@ class Update:
         self.aio_sensors = Client(self.ADAFRUIT_IO_KEY_SENSORS)
 
         try:
-            self.data = open('/home/pi/WeatherPi/logs/test_weather_with_alarm.json').read()
-            # self.data = open('/home/pi/WeatherPi/logs/latest_weather.json').read()
+            # self.data = open('/home/pi/WeatherPi/logs/test_weather_with_alarm.json').read()
+            self.data = open('/home/pi/WeatherPi/logs/latest_weather.json').read()
 
             self.json_data = json.loads(self.data)
 
