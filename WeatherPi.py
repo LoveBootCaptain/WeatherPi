@@ -6,6 +6,10 @@ from Modules.update_log import *
 from Modules.update_matrix import *
 from Modules.update_unicorn import *
 
+from multiprocessing import Process
+
+processes_bar = []
+
 
 def quit_all():
 
@@ -27,9 +31,18 @@ def main():
         update_latest_weather()
         update_log()
         update_matrix()
-        update_bargraph()
+
+        p = Process(target=update_bargraph)
+
+        for process in processes_bar:
+            process.terminate()
+
+        p.start()
+        processes_bar.append(p)
+
         update_io_thing_speak()
         update_io_adafruit()
+
         get_icon_path()
 
     except KeyboardInterrupt:

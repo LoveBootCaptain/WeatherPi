@@ -8,6 +8,7 @@ from get_sensor_data import *
 from init_blinkt import *
 from init_logging import *
 from init_matrix import *
+from check_alarms import *
 from WeatherPi import quit_all
 
 # read the config file
@@ -52,24 +53,114 @@ def update_matrix():
         return
 
 
-def update_bargraph():
+def blink_bar(duration, forecast, bar_color):
 
-    # threading.Timer(THREADING_TIMER, update_bargraph).start()
+    log_string('Alarm Zeitraum für Bargraph: {} Farbe: {}'.format(duration, bar_color))
+
+    def fade_sleep():
+        time.sleep(0.05)
+
+    def blink_sleep():
+        time.sleep(0.5)
+
+    def fade():
+        bargraph.write_display()
+        fade_sleep()
+
+    def long_sleep():
+        time.sleep(5)
+
+    def bar_fade_off():
+        for a in reversed(range(duration)):
+            bargraph.set_bar(a, OFF)
+            fade()
+
+    def bar_off():
+        for b in range(duration):
+            bargraph.set_bar(b, OFF)
+        bargraph.write_display()
+        blink_sleep()
+
+    def bar_on():
+        for c in range(duration):
+            bargraph.set_bar(c, bar_color)
+        bargraph.write_display()
+        blink_sleep()
+
+    while True:
+
+        for i in forecast["GREEN"]:
+            bargraph.set_bar(i, GREEN)
+            fade()
+
+        for i in forecast["YELLOW"]:
+            bargraph.set_bar(i, YELLOW)
+            fade()
+
+        for i in forecast["RED"]:
+            bargraph.set_bar(i, RED)
+            fade()
+
+        long_sleep()
+        long_sleep()
+        bar_fade_off()
+
+        for x in range(duration):
+            bargraph.set_bar(x, bar_color)
+            fade()
+
+        blink_sleep()
+        bar_off()
+        bar_on()
+        bar_off()
+        bar_on()
+
+        bar_fade_off()
+
+
+def set_bars(forecast):
+
+    bargraph.clear()
+
+    alarms = check_alarms()
+
+    if alarms:
+
+        for k, alarm in alarms.items():
+
+            if alarm['severity'] == 'warning':
+                max_alarm = alarm['duration']
+                max_alarm_duration = int(max_alarm)
+
+                blink_bar(max_alarm_duration, forecast, RED)
+
+            else:
+                max_alarm = max(alarms[idx]['duration'] for idx, alarm in enumerate(alarms))
+                max_alarm_duration = int(max_alarm)
+
+                blink_bar(max_alarm_duration, forecast, YELLOW)
+
+    else:
+
+        for i in forecast["GREEN"]:
+            bargraph.set_bar(i, GREEN)
+
+        for i in forecast["YELLOW"]:
+            bargraph.set_bar(i, YELLOW)
+
+        for i in forecast["RED"]:
+            bargraph.set_bar(i, RED)
+
+        bargraph.write_display()
+
+
+def update_bargraph():
 
     try:
 
-        bargraph.clear()
-
         rain_forecast = get_rain_forecast()
 
-        for i in rain_forecast["GREEN"]:
-            bargraph.set_bar(i, GREEN)
-
-        for i in rain_forecast["YELLOW"]:
-            bargraph.set_bar(i, YELLOW)
-
-        for i in rain_forecast["RED"]:
-            bargraph.set_bar(i, RED)
+        set_bars(rain_forecast)
 
         log_string('Bargraph Updated GREEN: {},\n'
                    'Bargraph Updated YELLOW: {},\n'
@@ -79,8 +170,6 @@ def update_bargraph():
                     rain_forecast["RED"]
                     ))
 
-        bargraph.write_display()
-
         blink('red')
 
     except IOError:
@@ -88,6 +177,7 @@ def update_bargraph():
         log_string('Bargraph Error')
 
         return
+
 
 hours_colon = hours
 hours_no_colon = hours_no_colon
