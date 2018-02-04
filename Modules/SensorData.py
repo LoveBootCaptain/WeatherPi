@@ -13,7 +13,7 @@ class SensorData(Data):
 
     def temp_inside(self):
 
-        sensor_temp_inside = self.sensor_temp_inside
+        sensor_temp_inside = self.sensor_temp_wohnzimmer
 
         output_temp = str(int(round(sensor_temp_inside))).zfill(2)
 

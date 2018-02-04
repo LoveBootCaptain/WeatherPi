@@ -30,17 +30,13 @@ class UpdateIcon(Data):
         icon_path = self.icon_path
 
         log_string('The icon path should be: {}. Checking it...'.format(icon_path))
-
         # check if file and path are valid
-
         if os.path.isfile(icon_path):
 
             log_string('The File: {} is valid and present!'.format(icon_path))
-
             log_string('Updating Unicorn with new weather condition icon: {}.'.format(icon))
 
             # set new icon_path
-
             img_file = icon_path
 
             blink('red')

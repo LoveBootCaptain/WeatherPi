@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import json
-import os
+from flask import Flask, jsonify
 
 from Data import Data
 from UpdateLog import log_string
@@ -11,6 +10,8 @@ class Endpoint(Data):
 
     def unicorn_pi_data(self):
 
+        log_string('requesting unicorn_pi data')
+
         rain_forecast = []
 
         for item in self.hourly_data[:8]:
@@ -18,20 +19,50 @@ class Endpoint(Data):
             rain_forecast.append(round(rain_percentage))
 
         unicorn_pi_data = {
-
-            "temp": self.temp_api,
+            "temp": self.sensor_temp_outside,
             "icon": self.weather_icon,
             "summary": self.forecast,
             "rain_forecast": rain_forecast
         }
 
-        with open('/home/pi/WeatherPi/logs/unicorn_pi_data.json', 'w') as outputfile:
-            json.dump(unicorn_pi_data, outputfile, indent=2, sort_keys=True)
+        log_string('returned data: {}'.format(unicorn_pi_data))
 
-        os.system('cp /home/pi/WeatherPi/logs/unicorn_pi_data.json /var/www/html')
+        return unicorn_pi_data
 
-        log_string('unicorn_pi_data copied to /var/www/html')
+    def sensor_module_data(self):
+
+        log_string('requesting sensor data')
+
+        data = {
+            "Wohnzimmer": self.sensor_temp_wohnzimmer,
+            "Kinderzimmer": self.sensor_temp_kinderzimmer,
+            "Schlafzimmer": self.sensor_temp_schlafzimmer,
+            "Balkon": self.sensor_temp_outside
+        }
+
+        log_string('returned data: {}'.format(data))
+
+        return data
+
+
+app = Flask(__name__)
+
+
+@app.route('/api/unicorn_pi_data')
+def get_unicorn_pi_data():
+    return jsonify(Endpoint().unicorn_pi_data())
+
+
+@app.route('/api/sensors')
+def get_sensor_data():
+    return jsonify(Endpoint().sensor_module_data())
+
+
+log_string('api endpoints created')
 
 
 if __name__ == '__main__':
-    Endpoint().unicorn_pi_data()
+
+    log_string('starting rest api')
+    app.run(debug=True, host='0.0.0.0', port=4545)
+

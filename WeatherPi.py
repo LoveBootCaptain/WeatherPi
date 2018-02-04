@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from multiprocessing import Process
+import os
 
 from Modules.Endpoint import Endpoint
 from Modules.Update import Update
@@ -32,7 +33,6 @@ def main():
         Update().update_json()
 
         UpdateLog().create_log()
-        Endpoint().unicorn_pi_data()
 
         update_matrix()
 
@@ -55,6 +55,7 @@ def main():
 if __name__ == '__main__':
 
     Update().update_json()
+    os.system('/usr/bin/python /home/pi/WeatherPi/Modules/Endpoint.py &')
 
     try:
 

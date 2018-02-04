@@ -15,10 +15,11 @@ class Data:
         self.config = Config().get_config()
 
         self.api_path = '/home/pi/WeatherPi/logs/latest_weather.json'
-        self.sensor_path = '/home/pi/WeatherPi/logs/sensors.json'
-        self.test_path = '/home/pi/WeatherPi/logs/test_weather_with_alarm.json'
-
         self.api_data = self.json_data(self.api_path)
+
+        # self.test_path = '/home/pi/WeatherPi/logs/test_weather_with_alarm.json'
+
+        self.sensor_path = '/home/pi/WeatherPi/logs/sensors.json'
         self.sensor_data = self.json_data(self.sensor_path)
 
         # api data
@@ -53,20 +54,32 @@ class Data:
         self.sensor_base = [item for item in self.sensor_data['devices']
                             if item.get('_id') == self.config['NETATMO_DEVICE_ID']][0]
 
-        # sensor data inside
+        # sensor data Wohnzimmer
+        self.sensor_temp_wohnzimmer = self.sensor_base['dashboard_data']['Temperature']
+        self.sensor_pressure_wohnzimmer = self.sensor_base['dashboard_data']['AbsolutePressure']
+        self.sensor_humidity_wohnzimmer = self.sensor_base['dashboard_data']['Humidity']
 
-        self.sensor_temp_inside = self.sensor_base['dashboard_data']['Temperature']
-        self.sensor_pressure_inside = self.sensor_base['dashboard_data']['AbsolutePressure']
-        self.sensor_humidity_inside = self.sensor_base['dashboard_data']['Humidity']
-        
-        # sensor data outside
+        # sensor data modules
         self.sensor_modules = self.sensor_base['modules']
 
-        self.sensor_modules_outside = [item for item in self.sensor_modules
-                                       if item.get('_id') == self.config['NETATMO_SENSOR_ID']][0]
+        # sensor data Kinderzimmer
+        self.sensor_kinderzimmer = [item for item in self.sensor_modules
+                                    if item.get('_id') == self.config['NETATMO_SENSOR_KINDER']][0]
 
-        self.sensor_temp_outside = self.sensor_modules_outside['dashboard_data']['Temperature']
-        self.sensor_humidity_outside = self.sensor_modules_outside['dashboard_data']['Humidity']
+        self.sensor_temp_kinderzimmer = self.sensor_kinderzimmer['dashboard_data']['Temperature']
+
+        # sensor data Schlafzimmer
+        self.sensor_schlafzimmer = [item for item in self.sensor_modules
+                                    if item.get('_id') == self.config['NETATMO_SENSOR_SCHLAF']][0]
+
+        self.sensor_temp_schlafzimmer = self.sensor_schlafzimmer['dashboard_data']['Temperature']
+
+        # sensor data Balkon
+        self.sensor_outside = [item for item in self.sensor_modules
+                                       if item.get('_id') == self.config['NETATMO_SENSOR_BALKON']][0]
+
+        self.sensor_temp_outside = self.sensor_outside['dashboard_data']['Temperature']
+        self.sensor_humidity_outside = self.sensor_outside['dashboard_data']['Humidity']
 
     def json_data(self, path):
 
