@@ -71,7 +71,7 @@ class Data:
     def json_data(self, path):
 
         try:
-            print('read data from path: {}'.format(path))
+            log_string('read data from path: {}'.format(path))
 
             data = open(path).read()
             json_data = json.loads(data)

@@ -77,10 +77,13 @@ class Update:
             print("Your refresh token is:", refresh_token)
             print("Your scopes are:", scope)
 
+            log_string('tokens generated')
+
             return access_token
 
         except requests.exceptions.HTTPError as error:
-            print(error.response.status_code, error.response.text)
+            log_string(error.response.status_code)
+            log_string(error.response.text)
 
     def update_sensors(self):
 
@@ -102,7 +105,8 @@ class Update:
             return data
 
         except requests.exceptions.HTTPError as error:
-            print(error.response.status_code, error.response.text)
+            log_string(error.response.status_code)
+            log_string(error.response.text)
 
     def update_json(self):
         self.update_api()
