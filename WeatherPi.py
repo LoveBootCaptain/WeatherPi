@@ -7,6 +7,7 @@ from Modules.UpdateLog import UpdateLog
 from Modules.update_matrix import *
 from Modules.UpdateUnicorn import UpdateIcon
 from Modules.UpdateUnicorn import UniCorn
+from Modules.Endpoint import Endpoint
 
 from Modules.init_unicorn import unicorn_init
 
@@ -33,6 +34,7 @@ def main():
         Update().update_json()
 
         UpdateLog().create_log()
+        Endpoint().unicorn_pi_data()
 
         update_matrix()
 

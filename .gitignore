@@ -88,12 +88,10 @@ ENV/
 # Rope project settings
 .DS_Store
 .ropeproject
+/Modules/_test_*
 /logs/*.json
 /config.json
 .idea
 /.travis.yml
-/Modules/_test_sensor.py
-/Modules/_test_timer.py
-/Modules/_test_unicorn.py
+/python-sudo.sh
 /request.rqst
-
