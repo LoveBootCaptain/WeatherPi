@@ -1,11 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import json
+
 import requests
 
 from Config import Config
-from init_logging import log_string
 from init_blinkt import blink
+from init_logging import log_string
 
 
 class Update:

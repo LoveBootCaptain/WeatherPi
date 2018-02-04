@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 import threading
 
+from Fonts.custom_font import *
 from RainData import RainData
 from SensorData import SensorData
-from Fonts.custom_font import *
 from check_alarms import *
 from clear import clear_all
 from init_blinkt import *
@@ -244,7 +244,6 @@ def update_clock_matrix():
 
     except KeyboardInterrupt:
 
-        # quit_all()
         clear_all()
 
 

@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from init_blinkt import *
-from init_logging import *
 from init_matrix import *
 from init_unicorn import *
 

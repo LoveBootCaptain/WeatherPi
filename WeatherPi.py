@@ -2,14 +2,12 @@
 # -*- coding: utf-8 -*-
 from multiprocessing import Process
 
+from Modules.Endpoint import Endpoint
 from Modules.Update import Update
 from Modules.UpdateLog import UpdateLog
-from Modules.update_matrix import *
-from Modules.UpdateUnicorn import UpdateIcon
-from Modules.UpdateUnicorn import UniCorn
-from Modules.Endpoint import Endpoint
-
+from Modules.UpdateUnicorn import UniCorn, UpdateIcon
 from Modules.init_unicorn import unicorn_init
+from Modules.update_matrix import *
 
 processes_bar = []
 

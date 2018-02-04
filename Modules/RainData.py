@@ -1,9 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from Data import Data
-
-from init_logging import log_string
 from Fonts.custom_font import *
+from init_logging import log_string
 
 
 class RainData(Data):
