@@ -86,16 +86,14 @@ ENV/
 .spyderproject
 
 # Rope project settings
+.DS_Store
 .ropeproject
-/logs/latest_weather.json
+/logs/*.json
 /config.json
 .idea
-
-/logs/test_weather_with_alarm.json
-.DS_Store
-
-
 /.travis.yml
 /Modules/_test_sensor.py
 /Modules/_test_timer.py
 /Modules/_test_unicorn.py
+/request.rqst
+

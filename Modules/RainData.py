@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from Update import Update
+from Data import Data
 
 from init_logging import log_string
 from Fonts.custom_font import *
 
 
-class RainData(Update):
+class RainData(Data):
 
     forecast_range_hour = 24  # use len(hourly) for full data (48h)
 

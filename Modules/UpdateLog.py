@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 
-from Update import Update
+from Data import Data
 from init_blinkt import *
 from init_logging import weather_logger
 
 
-class UpdateLog(Update):
+class UpdateLog(Data):
     def create_log(self):
 
         current_time = datetime.now().isoformat()
@@ -23,7 +23,7 @@ class UpdateLog(Update):
 
         log_string_base = '[timestamp={}], [temp_api={}], [sensor_temp_inside={}], [sensor_temp_outside={}], ' \
                           '[rain_percentage={}], [sensor_pressure_inside={}], [sensor_humidity_inside={}],' \
-                          ' [sensor_pressure_outside={}], [sensor_humidity_outside={}], [summary="{}"],' \
+                          '[sensor_humidity_outside={}], [summary="{}"],' \
                           ' [next_weather_today="{}"], [latitude={}], [longitude={}]]'.format(
                             current_time,
                             self.temp_api,
@@ -32,7 +32,6 @@ class UpdateLog(Update):
                             self.rain_percentage,
                             self.sensor_pressure_inside,
                             self.sensor_humidity_inside,
-                            self.sensor_pressure_outside,
                             self.sensor_humidity_outside,
                             self.forecast,
                             io_str,

@@ -3,8 +3,8 @@
 import time
 from collections import namedtuple
 from datetime import datetime
-
-from Update import Update
+from init_logging import log_string
+from Data import Data
 
 TFM = '%d.%m.%Y %H:%M:%S'
 
@@ -15,7 +15,7 @@ def time_convert(time_stamp):
 
 def check_alarms():
 
-    weather = Update().json_data
+    weather = Data().api_data
 
     alarms = {}
 

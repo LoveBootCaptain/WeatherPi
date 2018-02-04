@@ -4,7 +4,7 @@ import os.path
 
 from PIL import Image
 
-from Update import Update
+from Data import Data
 from init_blinkt import *
 from init_unicorn import *
 
@@ -13,7 +13,7 @@ img_file = None
 width, height = unicorn.get_shape()
 
 
-class UpdateIcon(Update):
+class UpdateIcon(Data):
 
     def set_icon_path(self):
 
@@ -64,7 +64,7 @@ class UpdateIcon(Update):
             return img_file
 
 
-class UniCorn(Update):
+class UniCorn(Data):
 
     def update_unicorn(self):
 

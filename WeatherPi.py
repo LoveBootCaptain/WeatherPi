@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from multiprocessing import Process
 
-from Modules.UpdateIO import UpdateIO
+from Modules.Update import Update
 from Modules.UpdateLog import UpdateLog
 from Modules.update_matrix import *
 from Modules.UpdateUnicorn import UpdateIcon
@@ -43,8 +43,6 @@ def main():
 
         p.start()
         processes_bar.append(p)
-
-        UpdateIO().send_iot_data()
 
         UpdateIcon().set_icon_path()
 
