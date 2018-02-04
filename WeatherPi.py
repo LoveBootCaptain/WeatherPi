@@ -54,6 +54,8 @@ def main():
 
 if __name__ == '__main__':
 
+    Update().update_json()
+
     try:
 
         matrix_init()

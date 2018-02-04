@@ -16,6 +16,7 @@ class Data:
         self.api_path = '/home/pi/WeatherPi/logs/latest_weather.json'
         self.sensor_path = '/home/pi/WeatherPi/logs/sensors.json'
         self.test_path = '/home/pi/WeatherPi/logs/test_weather_with_alarm.json'
+
         self.api_data = self.json_data(self.api_path)
         self.sensor_data = self.json_data(self.sensor_path)
 
