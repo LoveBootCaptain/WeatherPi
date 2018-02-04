@@ -29,7 +29,7 @@ def check_alarms():
 
             severity, title, time_start, expires, description = alarm_obj['severity'], alarm_obj['title'], \
                                                                 alarm_obj['time'], alarm_obj['expires'], \
-                                                                alarm_obj['description']
+                                                                alarm_obj['description'].encode('UTF-8')
 
             alarm_start_time = time_convert(int(time_start))
             alarm_expire_time = time_convert(int(expires))
