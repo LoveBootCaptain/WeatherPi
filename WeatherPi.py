@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from multiprocessing import Process
+import os
 
-from Modules.WebApp import app
 from Modules.Update import Update
 from Modules.UpdateLog import UpdateLog
 from Modules.UpdateUnicorn import UniCorn, UpdateIcon
@@ -18,8 +18,6 @@ def quit_all():
         thread.cancel()
         thread.join()
 
-def webserver():
-    app.run(debug=True, host='0.0.0.0', port=4545)
 
 def main():
 
@@ -56,8 +54,7 @@ def main():
 if __name__ == '__main__':
 
     Update().update_json()
-    web_thread = Process(target=webserver)
-    web_thread.start()
+    os.system('Modules/WebApp.py &')
 
     try:
 

@@ -2,10 +2,23 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, jsonify, render_template
 
-from UpdateLog import log_string
+from multiprocessing import Process
+from init_logging import log_string
 from Endpoint import Endpoint
 
 app = Flask(__name__)
+
+
+class WebApp(Process):
+    name = "Flask WebApp Process"
+
+    def __init__(self):
+        Process.__init__(self)
+        self.app = app
+        self.daemon = True
+
+    def run(self):
+        self.app.run(debug=True, host='0.0.0.0', port=4545)
 
 
 @app.route('/api/node')
@@ -53,4 +66,6 @@ log_string('api endpoints created')
 
 if __name__ == '__main__':
 
-    app.run(debug=True, host='0.0.0.0', port=4545)
+    WebApp().run()
+
+

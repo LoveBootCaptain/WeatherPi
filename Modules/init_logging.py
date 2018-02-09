@@ -26,7 +26,7 @@ debug_path = '/home/pi/WeatherPi/logs/Debug_Log_{}.log'.format(host)
 DEBUG_LOG_FILENAME = debug_path
 
 # Set up a specific logger with our desired output level
-debug_logger = logging.getLogger('DebugLogger')
+debug_logger = logging.getLogger('werkzeug')
 debug_logger.setLevel(logging.DEBUG)
 
 
