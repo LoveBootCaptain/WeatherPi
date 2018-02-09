@@ -25,16 +25,18 @@ YELLOW = 3
 
 def update_matrix():
 
-    sensor_temp_outside = SensorData().temp_outside()
+    temp_data = SensorData()
+
+    sensor_temp_outside = temp_data.temp_outside()
     rain_probability = RainData().rain_probability()
-    sensor_temp_inside = SensorData().temp_inside()
+    sensor_temp_inside = temp_data.temp_inside()
 
     update_list = {
         1: ('Grüne Matrix', matrix_green, 'sensor_temp_outside', sensor_temp_outside),
         2: ('Orange Matrix', matrix_orange, 'rain_probability', rain_probability),
         3: ('Rote Matrix', matrix_red, 'sensor_temp_inside', sensor_temp_inside)
     }
-    print(update_list)
+
     try:
 
         for matrix, value in update_list.items():

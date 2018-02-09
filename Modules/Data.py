@@ -44,7 +44,7 @@ class Data:
         
         # variables for weather icon
         self.version_path = self.config['UNICORN_VERSION'] + '/'
-        self.folder_path = '/home/pi/WeatherPi/Modules/Animations/'
+        self.folder_path = '/home/pi/WeatherPi/Modules/static/icons/Animations/'
         self.path = self.folder_path + self.version_path
         self.icon_extension = '.' + 'png'
         
@@ -76,7 +76,7 @@ class Data:
 
         # sensor data Balkon
         self.sensor_outside = [item for item in self.sensor_modules
-                                       if item.get('_id') == self.config['NETATMO_SENSOR_BALKON']][0]
+                               if item.get('_id') == self.config['NETATMO_SENSOR_BALKON']][0]
 
         self.sensor_temp_outside = self.sensor_outside['dashboard_data']['Temperature']
         self.sensor_humidity_outside = self.sensor_outside['dashboard_data']['Humidity']
