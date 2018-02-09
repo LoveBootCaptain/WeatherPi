@@ -44,7 +44,7 @@ class Data:
         
         # variables for weather icon
         self.version_path = self.config['UNICORN_VERSION'] + '/'
-        self.folder_path = '/home/pi/WeatherPi/Modules/static/icons/Animations/'
+        self.folder_path = '/home/pi/WeatherPi/Modules/Animations/'
         self.path = self.folder_path + self.version_path
         self.icon_extension = '.' + 'png'
         
