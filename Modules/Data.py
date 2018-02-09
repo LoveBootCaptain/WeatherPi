@@ -23,6 +23,7 @@ class Data:
         self.sensor_data = self.json_data(self.sensor_path)
 
         # api data
+        self.api_time = self.api_data['currently']['time']
         self.temp_api = self.api_data['currently']['temperature']
         self.rain_percentage_data = self.api_data['currently']['precipProbability']
         self.rain_percentage = self.rain_percentage_data * 100

@@ -1,3 +1,5 @@
+tzlocal
+pytz
 flask
 requests
 blinkt

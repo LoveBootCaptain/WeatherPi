@@ -55,6 +55,7 @@ if __name__ == '__main__':
 
     Update().update_json()
     os.system('Modules/WebApp.py &')
+    log_string('api endpoints created')
 
     try:
 

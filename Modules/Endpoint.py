@@ -1,6 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import os
+from datetime import datetime
+import pytz
+import tzlocal
+
 from itertools import izip
 
 from Data import Data
@@ -9,9 +13,8 @@ from UpdateLog import log_string
 
 class Endpoint(Data):
 
-    def unicorn_pi_data(self):
-
-        log_string('requesting unicorn_pi data')
+    def node_data(self):
+        log_string('requesting node data')
 
         rain_forecast = []
 
@@ -19,28 +22,64 @@ class Endpoint(Data):
             rain_percentage = item['precipProbability'] * 100
             rain_forecast.append(int(rain_percentage))
 
+        time_str = datetime.fromtimestamp(int(self.api_time)).strftime('%H:%M:%S')
+
         # response
-        unicorn_pi_data = {
-            "temp": self.sensor_temp_outside,
-            "icon": self.weather_icon,
-            "summary": self.forecast,
-            "rain_forecast": rain_forecast
-        }
+        node_data = {
+                "temp": self.sensor_temp_outside,
+                "icon": self.weather_icon,
+                "summary": self.forecast,
+                "rain_forecast": rain_forecast,
+                "updated": time_str
+            }
 
-        log_string('returned data: {}'.format(unicorn_pi_data))
+        log_string('returned data: {}'.format(node_data))
 
-        return unicorn_pi_data
+        return node_data
 
     def sensor_module_data(self):
-
         log_string('requesting sensor data')
+
+        wohnzimmer = self.sensor_base['dashboard_data']
+        kinderzimmer = self.sensor_kinderzimmer['dashboard_data']
+        schlafzimmer = self.sensor_schlafzimmer['dashboard_data']
+        balkon = self.sensor_outside['dashboard_data']
+
+        def get_updated_time(sensor_time):
+
+            update_time = datetime.utcfromtimestamp(sensor_time)
+            local_time = datetime.utcnow()
+            last_update_time = int((local_time - update_time).seconds / 60)
+
+            return last_update_time
 
         # response
         data = {
-            "Wohnzimmer": self.sensor_temp_wohnzimmer,
-            "Kinderzimmer": self.sensor_temp_kinderzimmer,
-            "Schlafzimmer": self.sensor_temp_schlafzimmer,
-            "Balkon": self.sensor_temp_outside
+            "Wohnzimmer": {
+                "Temperatur": wohnzimmer['Temperature'],
+                "Luftdruck": wohnzimmer['Pressure'],
+                "Kohlendioxyd": wohnzimmer['CO2'],
+                "Luftfeuchtigkeit": wohnzimmer['Humidity'],
+                "Lautstärke": wohnzimmer['Noise'],
+                "Updated": get_updated_time(wohnzimmer['time_utc'])
+            },
+            "Kinderzimmer": {
+                "Temperatur": kinderzimmer['Temperature'],
+                "Kohlendioxyd": kinderzimmer['CO2'],
+                "Luftfeuchtigkeit": kinderzimmer['Humidity'],
+                "Updated": get_updated_time(kinderzimmer['time_utc'])
+            },
+            "Schlafzimmer": {
+                "Temperatur": schlafzimmer['Temperature'],
+                "Kohlendioxyd": schlafzimmer['CO2'],
+                "Luftfeuchtigkeit": schlafzimmer['Humidity'],
+                "Updated": get_updated_time(schlafzimmer['time_utc'])
+            },
+            "Balkon": {
+                "Temperatur": balkon['Temperature'],
+                "Luftfeuchtigkeit": balkon['Humidity'],
+                "Updated": get_updated_time(balkon['time_utc'])
+            }
         }
 
         log_string('returned data: {}'.format(data))
@@ -49,12 +88,12 @@ class Endpoint(Data):
 
     @staticmethod
     def rpi_stats():
-
         # cpu stats
         res = os.popen('vcgencmd measure_temp').readline()
         cpu_temp = res.replace("temp=", "").replace("'C\n", "")
 
-        cpu_use = (str(os.popen("TERM=vt100 top -b -n 1 | awk '/Cpu\(s\):/ {print $2}'").readline().strip()).replace(',', '.'))
+        cpu_use = (
+        str(os.popen("TERM=vt100 top -b -n 1 | awk '/Cpu\(s\):/ {print $2}'").readline().strip()).replace(',', '.'))
 
         # ram
         ram_data = os.popen('free')
@@ -80,6 +119,8 @@ class Endpoint(Data):
 
         disk = dict(izip(disk_line_1, disk_line_2))
 
+        time_str = datetime.now().strftime('%H:%M:%S')
+
         # response
         rpi_stats = {
             "CPU": {
@@ -87,7 +128,8 @@ class Endpoint(Data):
                 "usage": float(cpu_use)
             },
             "RAM": ram,
-            "DISK": disk
+            "DISK": disk,
+            "updated": time_str
         }
 
         log_string('returned data: {}'.format(rpi_stats))

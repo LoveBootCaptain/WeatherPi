@@ -16,67 +16,115 @@
             <div class="cover-container text-white">
                 <div class="card-group">
                     <div class="card text-white bg-dark">
-                        <div class="card-header">
-                            <span class="card-title">Temperatur</span>
+                        <div class="card-header text-center">
+                            <span class="card-title">Wohnzimmer</span>
                         </div>
                         <div class="card-body">
-                            <ul class="list-group list-group-flush ">
-                                {% for key, value in sensor_data.iteritems() %}
-                                    <li class="list-group-item">
-                                        <span class="small">{{ key }}: </span><span class="text-right">{{ value }}</span>
-                                    </li>
+                            <table class="table table-dark ">
+                                <tbody>
+                                {% for key, value in sensor_data['Wohnzimmer'].iteritems() %}
+                                    {% if key == 'Updated' %}
+                                    {% else %}
+                                        <tr>
+                                            <th scope="row">{{ key.decode('utf-8') }}</th>
+                                            <td class="text-right">{{ value }}</td>
+                                        </tr>
+                                    {% endif %}
                                 {% endfor %}
-                            </ul>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
+                            <small class="text-muted">Letztes Update vor {{ sensor_data['Wohnzimmer']['Updated'] }} min
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-group">
+
+                    <div class="card text-white bg-dark">
+                        <div class="card-header text-center">
+                            <span class="card-title">Kinderzimmer</span>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-dark ">
+                                <tbody>
+                                {% for key, value in sensor_data['Kinderzimmer'].iteritems() %}
+                                    {% if key == 'Updated' %}
+                                    {% else %}
+                                        <tr>
+                                            <th scope="row">{{ key.decode('utf-8') }}</th>
+                                            <td class="text-right">{{ value }}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Letztes Update vor {{ sensor_data['Kinderzimmer']['Updated'] }} min
+                            </small>
                         </div>
                     </div>
 
                     <div class="card text-white bg-dark">
-                        <div class="card-header">
-                            <span class="card-title">Temperatur</span>
+                        <div class="card-header text-center">
+                            <span class="card-title">Schlafzimmer</span>
                         </div>
                         <div class="card-body">
-                            <ul class="list-group list-group-flush ">
-                                {% for key, value in sensor_data.iteritems() %}
-                                    <li class="list-group-item">
-                                        <span class="small">{{ key }}: </span><span class="text-right">{{ value }}</span>
-                                    </li>
+                            <table class="table table-dark ">
+                                <tbody>
+                                {% for key, value in sensor_data['Schlafzimmer'].iteritems() %}
+                                    {% if key == 'Updated' %}
+                                    {% else %}
+                                        <tr>
+                                            <th scope="row">{{ key.decode('utf-8') }}</th>
+                                            <td class="text-right">{{ value }}</td>
+                                        </tr>
+                                    {% endif %}
                                 {% endfor %}
-                            </ul>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-
-                    <div class="card text-white bg-dark">
-                        <div class="card-header">
-                            <span class="card-title">Temperatur</span>
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush ">
-                                {% for key, value in sensor_data.iteritems() %}
-                                    <li class="list-group-item">
-                                        <span class="small">{{ key }}: </span><span class="text-right">{{ value }}</span>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
+                            <small class="text-muted">Letztes Update vor {{ sensor_data['Schlafzimmer']['Updated'] }} min
+                            </small>
                         </div>
                     </div>
 
                 </div>
                 <div class="card-group">
                     <div class="card text-white bg-dark">
+                        <div class="card-header text-center">
+                            <span class="card-title">Balkon</span>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-dark ">
+                                <tbody>
+                                {% for key, value in sensor_data['Balkon'].iteritems() %}
+                                    {% if key == 'Updated' %}
+                                    {% else %}
+                                        <tr>
+                                            <th scope="row">{{ key.decode('utf-8') }}</th>
+                                            <td class="text-right">{{ value }}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Letztes Update vor {{ sensor_data['Balkon']['Updated'] }} min
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-group">
+                    <div class="card text-white text-center bg-dark">
                         <div class="card-body">
                             <button type="button" class="btn btn-primary" onClick="refreshPage()">Reload</button>
-                        </div>
-                        <div class="card-footer text-muted">
-                            -- ToDo: insert last update time here --
                         </div>
                     </div>
                 </div>
@@ -90,16 +138,16 @@
 {% endblock %}
 
 {% block footer %}
-  {{super()}}
+    {{ super() }}
 {% endblock %}
 
 {% block scripts %}
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script>
-    function refreshPage() {
-        window.location.reload();
-    }
-</script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script>
+        function refreshPage() {
+            window.location.reload();
+        }
+    </script>
 {% endblock %}

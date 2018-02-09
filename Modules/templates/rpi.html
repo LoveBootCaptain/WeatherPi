@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block main %}
-    <main role="main" class="inner mt-3">
+    <main role="main" class="inner text-center mt-3">
         <div class="cover-container text-white">
 
             <div class="card-group">
@@ -60,25 +60,25 @@
                             <div class="btn-group btn-group-lg btn-group-toggle" data-toggle="buttons">
 
                                 <div class="btn-group mr-1" role="group" aria-label="First group">
-                                    <button class="btn btn-secondary" data-toggle="collapse" data-target="#collapseOne"
-                                            aria-expanded="true" aria-controls="collapseOne">
+                                    <label class="btn btn-secondary active" data-toggle="collapse" data-target="#collapseOne">
+                                        <input type="radio" name="options" id="option1" autocomplete="off" checked>
                                         RAM
                                         <small>Stats</small>
-                                    </button>
+                                    </label>
                                 </div>
                                 <div class="btn-group ml-1" role="group" aria-label="Second group">
-                                    <button class="btn btn-secondary" data-toggle="collapse" data-target="#collapseTwo"
-                                            aria-expanded="false" aria-controls="collapseTwo">
+                                    <label class="btn btn-secondary" data-toggle="collapse" data-target="#collapseTwo">
+                                        <input type="radio" name="options" id="option2" autocomplete="off">
                                         DISK
                                         <small>Stats</small>
-                                    </button>
+                                    </label>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 
                     <div class="card-group">
 
@@ -183,7 +183,7 @@
                         <button type="button" class="btn btn-primary" onClick="refreshPage()">Reload</button>
                     </div>
                     <div class="card-footer text-muted">
-                        -- ToDo: insert last update time here --
+                        <span>Letztes Update um {{ rpi_data['updated'] }} Uhr</span>
                     </div>
                 </div>
             </div>
