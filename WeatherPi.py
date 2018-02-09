@@ -55,7 +55,7 @@ def main():
 if __name__ == '__main__':
 
     Update().update_json()
-    os.system('/usr/bin/python /home/pi/WeatherPi/Modules/Endpoint.py &')
+    os.system('/usr/bin/python /home/pi/WeatherPi/Modules/WebApp.py &')
 
     try:
 
