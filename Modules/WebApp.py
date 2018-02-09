@@ -25,27 +25,27 @@ def get_rpi_stats():
 
 @app.route('/')
 def index():
-    return render_template('home.jinja2')
+    return render_template('home.html')
 
 
 @app.route('/node')
 def node():
-    return render_template('node.jinja2', node_data=Endpoint().unicorn_pi_data())
+    return render_template('node.html', node_data=Endpoint().unicorn_pi_data())
 
 
 @app.route('/sensors')
 def sensors():
-    return render_template('sensors.jinja2', sensor_data=Endpoint().sensor_module_data())
+    return render_template('sensors.html', sensor_data=Endpoint().sensor_module_data())
 
 
 @app.route('/rpi')
 def rpi():
-    return render_template('rpi.jinja2', rpi_data=Endpoint().rpi_stats())
+    return render_template('rpi.html', rpi_data=Endpoint().rpi_stats())
 
 
 @app.route('/base')
 def base():
-    return render_template('base.jinja2')
+    return render_template('base.html')
 
 
 log_string('api endpoints created')
