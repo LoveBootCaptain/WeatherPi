@@ -1,0 +1,143 @@
+{% extends "base.jinja2" %}
+
+{% block node %}active{% endblock %}
+
+{% block title %}
+    Node: UnicornPi - Dashboard
+{% endblock %}
+
+{% block description %}
+    Data monitor for the UniCornPi Display Node
+{% endblock %}
+
+
+{% block main %}
+    <main role="main" class="inner mt-3">
+        {% if node_data %}
+            <div class="cover-container text-white">
+
+                <div class="card-group">
+                    <div class="card text-white bg-dark">
+                        <div class="card-header">
+                            <h1 class="card-title mb-0">UnicornPi Monitor</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-group">
+                    <div class="card text-white bg-dark">
+                        <div class="card-header">
+                            <span class="card-title">Temperatur</span>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="jumbotron jumbotron-fluid rounded ">
+                                <div class="containe container-fluid">
+                                    <span class="display-4">{{ node_data['temp'] }} °C</span>
+                                    <hr class="my-3">
+                                    <span class="lead">Balkon</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card text-white bg-dark">
+                        <div class="card-header">
+                            <span class="card-title">Wetterbedingungen</span>
+                        </div>
+                        <div class="card-body">
+                            <img class="img-fluid rounded"
+                                 src="https://raw.githubusercontent.com/LoveBootCaptain/unicornhat_weather_icons/master/animation/HD/{{ node_data['icon'] }}.gif"
+                                 alt="{{ node_data['summary'].decode('utf-8') }}">
+                            <hr class="my-3">
+                            <span class="lead">{{ node_data['summary'].decode('utf-8') }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-group">
+                    <div class="card text-white bg-dark">
+                        <div class="card-header">
+                            <span class="card-title">Regenwahrscheinlichkeit 8h </span>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="progress" style="height: 30px;">
+                                {% for item in node_data['rain_forecast'] %}
+                                    {% if item == 0 %}
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 12.5%"
+                                             aria-valuenow="12.5" aria-valuemin="0"
+                                             data-container="body"
+                                             data-toggle="popover"
+                                             data-placement="top"
+                                             data-content="+ {{ loop.index }}h">
+                                            <span class="text-light"> {{ item }} %</span>
+                                        </div>
+                                    {% elif item > 0 and item < 15 %}
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 12.5%"
+                                             aria-valuenow="12.5" aria-valuemin="0"
+                                             data-container="body"
+                                             data-toggle="popover"
+                                             data-placement="top"
+                                             data-content="+ {{ loop.index }}h">
+                                            <span class="text-dark"> {{ item }} %</span>
+                                        </div>
+                                    {% else %}
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 12.5%"
+                                             aria-valuenow="12.5" aria-valuemin="0"
+                                             data-container="body"
+                                             data-toggle="popover"
+                                             data-placement="top"
+                                             data-content="+ {{ loop.index }}h">
+                                            <span class="text-light"> {{ item }} %</span>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-group">
+                    <div class="card text-white bg-dark">
+                        <div class="card-body">
+                            <button type="button" class="btn btn-primary" onClick="refreshPage()">Reload</button>
+                        </div>
+                        <div class="card-footer text-muted">
+                            -- ToDo: insert last update time here --
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        {% else %}
+            <h1 class="cover-heading">No Data</h1>
+            <p class="lead">please try again later</p>
+        {% endif %}
+    </main>
+{% endblock %}
+
+{% block footer %}
+  {{super()}}
+{% endblock %}
+
+{% block scripts %}
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+    $('[data-toggle="popover"]').popover({
+        trigger: 'hover'
+    });
+</script>
+<script>
+    function refreshPage() {
+        window.location.reload();
+    }
+</script>
+{% endblock %}

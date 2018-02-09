@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="/static/icons/favicon.png">
+
+    <title>{% block title %}{% endblock %} | WeatherPi</title>
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <meta name="author" content="lovebootcaptain">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/theme.css" rel="stylesheet">
+
+    {% block head %}{% endblock %}
+
+</head>
+
+<body class="text-light text-center">
+<div class="cover-container container-fluid d-flex h-100 w-100 p-3 mx-auto flex-column justify-content-between">
+    <div class="masthead mb-auto">
+        <div class="inner">
+            <h3 class="masthead-brand">WeatherPi</h3>
+
+            <nav class="nav nav-masthead justify-content-center">
+                <a class="nav-link {% block home %}{% endblock %}" href="/">Home</a>
+                <a class="nav-link {% block node %}{% endblock %}" href="/node">Node</a>
+                <a class="nav-link {% block sensors %}{% endblock %}" href="/sensors">Sensors</a>
+                <a class="nav-link {% block rpi_stats %}{% endblock %}" href="/rpi">RPI Stats</a>
+            </nav>
+
+        </div>
+    </div>
+
+    {% block main %}{% endblock %}
+
+    {% block footer %}
+        <footer class="mastfoot mt-auto">
+            <div class="inner mt-3 text-center">
+                <hr>
+                <p>WeatherPi is made with <span class="badge icon"> </span> by
+                    <a href="https://twitter.com/lovebootcaptain">@lovebootcaptain</a><br>
+                    Visit <a href="https://github.com/LoveBootCaptain/WeatherPi">github</a> for more
+                    information about the project.
+                </p>
+            </div>
+        </footer>
+    {% endblock %}
+
+</div>
+</body>
+{% block scripts %}{% endblock %}
+</html>

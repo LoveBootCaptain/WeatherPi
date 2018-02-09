@@ -1,0 +1,214 @@
+{% extends "base.jinja2" %}
+
+{% block rpi_stats %}active{% endblock %}
+
+{% block title %}
+    RPI Stats
+{% endblock %}
+
+{% block description %}
+    Some useful stats from the heart of the RaspberryPi Zero. CPU, RAM and DISK Dashboard
+{% endblock %}
+
+{% block main %}
+    <main role="main" class="inner mt-3">
+        <div class="cover-container text-white">
+
+            <div class="card-group">
+
+                <div class="card text-white bg-dark">
+                    <div class="card-header">
+                        <span class="card-title">CPU <small>Temp</small></span>
+                    </div>
+                    <div class="card-body">
+                        <div class="single-chart">
+                            <svg viewbox="0 0 36 36" class="circular-chart orange">
+                                <path class="circle-bg"
+                                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                <path class="circle" stroke-dasharray="{{ rpi_data['CPU']['temp'] }}, 100"
+                                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                <text x="18" y="20.35" class="percentage">{{ rpi_data['CPU']['temp'] }}°C</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card text-white bg-dark">
+                    <div class="card-header">
+                        <span class="card-title">CPU <small>Usage</small></span>
+                    </div>
+                    <div class="card-body">
+                        <div class="single-chart">
+                            <svg viewbox="0 0 36 36" class="circular-chart green">
+                                <path class="circle-bg"
+                                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                <path class="circle" stroke-dasharray="{{ rpi_data['CPU']['usage'] }}, 100"
+                                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                <text x="18" y="20.35" class="percentage">{{ rpi_data['CPU']['usage'] }}%</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="accordion">
+
+                <div class="card-group">
+                    <div class="card text-white bg-dark">
+                        <div class="card-body">
+                            <div class="btn-group btn-group-lg btn-group-toggle" data-toggle="buttons">
+
+                                <div class="btn-group mr-1" role="group" aria-label="First group">
+                                    <button class="btn btn-secondary" data-toggle="collapse" data-target="#collapseOne"
+                                            aria-expanded="true" aria-controls="collapseOne">
+                                        RAM
+                                        <small>Stats</small>
+                                    </button>
+                                </div>
+                                <div class="btn-group ml-1" role="group" aria-label="Second group">
+                                    <button class="btn btn-secondary" data-toggle="collapse" data-target="#collapseTwo"
+                                            aria-expanded="false" aria-controls="collapseTwo">
+                                        DISK
+                                        <small>Stats</small>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+
+                    <div class="card-group">
+
+                        <div class="card text-white bg-dark">
+                            <div class="card-header">
+                                <span class="card-title">RAM <small>used</small></span>
+                            </div>
+                            <div class="card-body">
+                                <svg viewbox="0 0 36 36" class="circular-chart blue">
+                                    <path class="circle-bg"
+                                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                    <path class="circle"
+                                          stroke-dasharray="{{ rpi_data['RAM']['used_prec'] }}, 100"
+                                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                    <text x="18" y="20.35" class="percentage">{{ rpi_data['RAM']['used_prec'] }}%
+                                    </text>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="card text-white bg-dark">
+                            <div class="card-header">
+                                <span class="card-title">RAM <small>stats</small></span>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-dark ">
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row">Total</th>
+                                        <td>{{ rpi_data['RAM']['total'] }} MB</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Used</th>
+                                        <td>{{ rpi_data['RAM']['used'] }} MB</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Free</th>
+                                        <td>{{ rpi_data['RAM']['free'] }} MB</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-group">
+
+                        <div class="card text-white bg-dark">
+                            <div class="card-header">
+                                <span class="card-title">DISK <small>used</small></span>
+                            </div>
+                            <div class="card-body">
+                                <svg viewbox="0 0 36 36" class="circular-chart red">
+                                    <path class="circle-bg"
+                                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                    <path class="circle"
+                                          stroke-dasharray="{{ rpi_data['DISK']['used_prec'] }}, 100"
+                                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                    <text x="18" y="20.35"
+                                          class="percentage">{{ rpi_data['DISK']['used_prec'] }}%
+                                    </text>
+                                </svg>
+
+                            </div>
+                        </div>
+                        <div class="card text-white bg-dark">
+                            <div class="card-header">
+                                <span class="card-title">DISK <small>stats</small></span>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-dark ">
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row">Total</th>
+                                        <td>{{ rpi_data['DISK']['total'] }} MB</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Used</th>
+                                        <td>{{ rpi_data['DISK']['used'] }} MB</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Free</th>
+                                        <td>{{ rpi_data['DISK']['free'] }} MB</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card-group">
+                <div class="card text-white bg-dark">
+                    <div class="card-body">
+                        <button type="button" class="btn btn-primary" onClick="refreshPage()">Reload</button>
+                    </div>
+                    <div class="card-footer text-muted">
+                        -- ToDo: insert last update time here --
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+{% endblock %}
+
+{% block footer %}
+    {{ super() }}
+{% endblock %}
+
+{% block scripts %}
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function refreshPage() {
+            window.location.reload();
+        }
+    </script>
+{% endblock %}

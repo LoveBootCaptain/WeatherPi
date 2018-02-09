@@ -1,0 +1,36 @@
+{% extends "base.jinja2" %}
+
+{% block home %}active{% endblock %}
+
+{% block title %}
+    WeatherPi Dashboard
+{% endblock %}
+
+{% block description %}
+    Wetterdaten von Sensoren und API's liebevoll gesammelt, ausgewertet, ausgeliefert und angezeigt von einem RaspberryPi Zero
+{% endblock %}
+
+{% block main %}
+    <main role="main" class="inner">
+        <div class="card text-white bg-dark">
+            <div class="card-header">
+                <h1 class="cover-heading">WeatherPi Dashboard</h1>
+            </div>
+            <div class="card-body">
+                <p class="lead">Wetterdaten von Sensoren und API's liebevoll gesammelt, ausgewertet, ausgeliefert und
+                    angezeigt von einem
+                <p class="lead font-weight-bold text-muted">RaspberryPi <span class="badge icon"> </span> Zero</p>
+            </div>
+            <div class="card-footer text-muted">
+                <p class="lead">
+                    <a href="https://github.com/LoveBootCaptain/WeatherPi" class="btn btn-lg btn-secondary">Learn
+                        more</a>
+                </p>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block footer %}
+    {{ super() }}
+{% endblock %}

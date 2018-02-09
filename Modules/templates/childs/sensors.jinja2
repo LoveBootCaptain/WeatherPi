@@ -1,0 +1,105 @@
+{% extends "base.jinja2" %}
+
+{% block sensors %}active{% endblock %}
+
+{% block title %}
+    Sensors Dashboard
+{% endblock %}
+
+{% block description %}
+    Dashboard for all data from sensor nodes
+{% endblock %}
+
+{% block main %}
+    <main role="main" class="inner mt-3">
+        {% if sensor_data %}
+            <div class="cover-container text-white">
+                <div class="card-group">
+                    <div class="card text-white bg-dark">
+                        <div class="card-header">
+                            <span class="card-title">Temperatur</span>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush ">
+                                {% for key, value in sensor_data.iteritems() %}
+                                    <li class="list-group-item">
+                                        <span class="small">{{ key }}: </span><span class="text-right">{{ value }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Last updated 3 mins ago</small>
+                        </div>
+                    </div>
+
+                    <div class="card text-white bg-dark">
+                        <div class="card-header">
+                            <span class="card-title">Temperatur</span>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush ">
+                                {% for key, value in sensor_data.iteritems() %}
+                                    <li class="list-group-item">
+                                        <span class="small">{{ key }}: </span><span class="text-right">{{ value }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Last updated 3 mins ago</small>
+                        </div>
+                    </div>
+
+                    <div class="card text-white bg-dark">
+                        <div class="card-header">
+                            <span class="card-title">Temperatur</span>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush ">
+                                {% for key, value in sensor_data.iteritems() %}
+                                    <li class="list-group-item">
+                                        <span class="small">{{ key }}: </span><span class="text-right">{{ value }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Last updated 3 mins ago</small>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-group">
+                    <div class="card text-white bg-dark">
+                        <div class="card-body">
+                            <button type="button" class="btn btn-primary" onClick="refreshPage()">Reload</button>
+                        </div>
+                        <div class="card-footer text-muted">
+                            -- ToDo: insert last update time here --
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        {% else %}
+            <h1 class="cover-heading">No Data</h1>
+            <p class="lead">please try again later</p>
+        {% endif %}
+    </main>
+{% endblock %}
+
+{% block footer %}
+  {{super()}}
+{% endblock %}
+
+{% block scripts %}
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script>
+    function refreshPage() {
+        window.location.reload();
+    }
+</script>
+{% endblock %}
