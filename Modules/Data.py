@@ -14,7 +14,7 @@ class Data:
         # set the configs
         self.config = Config().get_config()
 
-        self.api_path = '/home/pi/WeatherPi/logs/latest_weather.json'
+        self.api_path = '/home/pi/WeatherPi/logs/api.json'
         self.api_data = self.json_data(self.api_path)
 
         # self.test_path = '/home/pi/WeatherPi/logs/test_weather_with_alarm.json'

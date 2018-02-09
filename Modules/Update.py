@@ -44,11 +44,8 @@ class Update:
             data = requests.get(api_request_url, timeout=5).json()
 
             # save data dict as json file
-            with open('/home/pi/WeatherPi/logs/latest_weather.json', 'w') as outputfile:
+            with open('/home/pi/WeatherPi/logs/api.json', 'w') as outputfile:
                 json.dump(data, outputfile, indent=2, sort_keys=True)
-
-            with open('/home/pi/WeatherPi/logs/current_weather.json', 'w') as outputfile:
-                json.dump(data['currently'], outputfile, indent=2, sort_keys=True)
 
             log_string('json data saved to temporary file')
 
