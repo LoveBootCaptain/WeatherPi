@@ -137,6 +137,10 @@ body {
     background-color: rgba(0, 0, 0, .03);
 }
 
+.table-dark td, .table-dark th, .table-dark thead th {
+    border-color: rgba(0, 0, 0, .1);
+}
+
 /*
  * Circle Charts
  */
