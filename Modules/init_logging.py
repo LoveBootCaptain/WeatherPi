@@ -2,13 +2,10 @@
 # -*- coding: utf-8 -*-
 # create some logger details
 import logging.handlers
-import socket
-
-host = socket.gethostname()
 
 # create a weather logger
 
-weather_path = '/home/pi/WeatherPi/logs/Weather_Log_Data_{}.log'.format(host)
+weather_path = '/home/pi/WeatherPi/logs/Weather_Log_Data.log'
 WEATHER_LOG_FILENAME = weather_path
 
 # Set up a specific logger with our desired output level
@@ -22,7 +19,7 @@ weather_logger.addHandler(weather_handler)
 
 # create a debug logger
 
-debug_path = '/home/pi/WeatherPi/logs/Debug_Log_{}.log'.format(host)
+debug_path = '/home/pi/WeatherPi/logs/Debug_Log.log'
 DEBUG_LOG_FILENAME = debug_path
 
 # Set up a specific logger with our desired output level
