@@ -93,5 +93,4 @@ ENV/
 /config.json
 .idea
 /.travis.yml
-/python-sudo.sh
 /request.rqst
